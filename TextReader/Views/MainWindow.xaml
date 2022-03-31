@@ -7,6 +7,15 @@
     Width="800"
     Height="600"
     prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resource/TextItemTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -21,7 +30,10 @@
             <MenuItem Header="File" />
         </Menu>
 
-        <ListView Grid.Row="1" ItemsSource="{Binding Texts}" />
+        <ListView
+            Grid.Row="1"
+            ItemTemplate="{StaticResource ResourceKey=TextItemTemplate}"
+            ItemsSource="{Binding Texts}" />
 
         <StatusBar Grid.Row="2" Height="20" />
 
