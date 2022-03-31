@@ -21,7 +21,7 @@
             <MenuItem Header="File" />
         </Menu>
 
-        <ListView Grid.Row="1" />
+        <ListView Grid.Row="1" ItemsSource="{Binding Texts}" />
 
         <StatusBar Grid.Row="2" Height="20" />
 
