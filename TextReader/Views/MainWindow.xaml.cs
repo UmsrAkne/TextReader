@@ -1,7 +1,7 @@
-﻿using System.Windows;
-
-namespace TextReader.Views
+﻿namespace TextReader.Views
 {
+using System.Windows;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>

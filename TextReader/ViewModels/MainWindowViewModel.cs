@@ -1,18 +1,19 @@
-﻿using Prism.Mvvm;
-
-namespace TextReader.ViewModels
+﻿namespace TextReader.ViewModels
 {
+using Prism.Mvvm;
+
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Prism Application";
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+        private string title = "Prism Application";
 
         public MainWindowViewModel()
         {
+        }
+
+        public string Title
+        {
+            get { return title; }
+            set { SetProperty(ref title, value); }
         }
     }
 }

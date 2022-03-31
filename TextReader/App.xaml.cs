@@ -1,10 +1,9 @@
-﻿using TextReader.Views;
-using Prism.Ioc;
-using Prism.Modularity;
-using System.Windows;
-
-namespace TextReader
+﻿namespace TextReader
 {
+    using System.Windows;
+    using Prism.Ioc;
+    using TextReader.Views;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -17,7 +16,6 @@ namespace TextReader
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
         }
     }
 }
