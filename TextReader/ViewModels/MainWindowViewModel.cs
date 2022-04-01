@@ -7,6 +7,7 @@
     public class MainWindowViewModel : BindableBase
     {
         private string title = "Prism Application";
+        private readonly TextDBContext databaseContext = new TextDBContext();
 
         private List<IText> texts = new List<IText>()
         {
@@ -17,6 +18,7 @@
 
         public MainWindowViewModel()
         {
+            databaseContext.Database.EnsureCreated();
         }
 
         public string Title
