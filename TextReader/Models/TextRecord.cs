@@ -1,5 +1,6 @@
 ﻿namespace TextReader.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     public class TextRecord
@@ -10,5 +11,17 @@
 
         [Required]
         public string Text { get; set; } = string.Empty;
+
+        [Required]
+        public int Index { get; set; }
+
+        [Required]
+        public bool Read { get; set; }
+
+        [Required]
+        public bool Title { get; set; }
+
+        [Required]
+        public DateTime CreationDateTime { get; set; }
     }
 }
