@@ -7,7 +7,15 @@
 
     public class TextDBContext : DbContext
     {
-        public DbSet<TextRecord> Texts { get; set; }
+        public TextDBContext()
+        {
+            DBQueryer = new DBQueryer();
+            DBQueryer.Target = Texts;
+        }
+
+        private DbSet<TextRecord> Texts { get; set; }
+
+        public DBQueryer DBQueryer { get; private set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
