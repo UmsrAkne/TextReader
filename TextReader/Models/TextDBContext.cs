@@ -13,9 +13,9 @@
             DBQueryer.Target = Texts;
         }
 
-        private DbSet<TextRecord> Texts { get; set; }
-
         public DBQueryer DBQueryer { get; private set; }
+
+        private DbSet<TextRecord> Texts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

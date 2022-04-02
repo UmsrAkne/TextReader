@@ -6,8 +6,9 @@
 
     public class MainWindowViewModel : BindableBase
     {
-        private string title = "Prism Application";
         private readonly TextDBContext databaseContext = new TextDBContext();
+
+        private string title = "Prism Application";
 
         private List<IText> texts = new List<IText>()
         {
