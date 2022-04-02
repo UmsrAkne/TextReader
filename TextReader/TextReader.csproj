@@ -68,6 +68,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\DBQueryer.cs" />
     <Compile Include="Models\IText.cs" />
     <Compile Include="Models\PlainText.cs" />
     <Compile Include="Models\TextDBContext.cs" />

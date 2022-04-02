@@ -19,7 +19,7 @@
         public bool Read { get; set; }
 
         [Required]
-        public bool Title { get; set; }
+        public string Title { get; set; }
 
         [Required]
         public DateTime CreationDateTime { get; set; }
