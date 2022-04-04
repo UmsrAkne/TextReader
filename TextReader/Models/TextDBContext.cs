@@ -25,6 +25,12 @@
             return DBQueryer.GetTexts(title, dateTime).ToList();
         }
 
+        public void AddTexts(List<TextRecord> texts)
+        {
+            DBQueryer.AddTexts(texts);
+            SaveChanges();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string databaseFileName = "TextDB.sqlite";

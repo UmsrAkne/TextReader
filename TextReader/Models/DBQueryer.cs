@@ -14,5 +14,10 @@
                 .Where(record => title == record.Title && record.CreationDateTime == dateTime)
                 .OrderBy(record => record.Index);
         }
+
+        public void AddTexts(IEnumerable<TextRecord> texts)
+        {
+            Target.ToList().AddRange(texts);
+        }
     }
 }
