@@ -1,7 +1,10 @@
 ﻿namespace TextReader.Models
 {
+    using System;
+    using System.Collections.Generic;
     using System.Data.SQLite;
     using System.IO;
+    using System.Linq;
     using Microsoft.Data.Sqlite;
     using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +16,14 @@
             DBQueryer.Target = Texts;
         }
 
-        public DBQueryer DBQueryer { get; private set; }
+        private DBQueryer DBQueryer { get; set; }
 
         private DbSet<TextRecord> Texts { get; set; }
+
+        public List<TextRecord> GetTexts(string title, DateTime dateTime)
+        {
+            return DBQueryer.GetTexts(title, dateTime).ToList();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
