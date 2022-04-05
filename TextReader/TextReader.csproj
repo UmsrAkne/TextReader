@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="Models\DBs\DBQueryer.cs" />
     <Compile Include="Models\DBs\TitleRecord.cs" />
+    <Compile Include="Models\DropBehavior.cs" />
     <Compile Include="Models\IText.cs" />
     <Compile Include="Models\PlainText.cs" />
     <Compile Include="Models\DBs\TextDBContext.cs" />
