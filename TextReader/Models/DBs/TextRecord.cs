@@ -1,4 +1,4 @@
-﻿namespace TextReader.Models
+﻿namespace TextReader.Models.DBs
 {
     using System;
     using System.ComponentModel.DataAnnotations;

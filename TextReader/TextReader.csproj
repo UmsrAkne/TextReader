@@ -68,11 +68,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\DBQueryer.cs" />
+    <Compile Include="Models\DBs\DBQueryer.cs" />
     <Compile Include="Models\IText.cs" />
     <Compile Include="Models\PlainText.cs" />
-    <Compile Include="Models\TextDBContext.cs" />
-    <Compile Include="Models\TextRecord.cs" />
+    <Compile Include="Models\DBs\TextDBContext.cs" />
+    <Compile Include="Models\DBs\TextRecord.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Prism.Mvvm;
     using TextReader.Models;
+    using TextReader.Models.DBs;
 
     public class MainWindowViewModel : BindableBase
     {
