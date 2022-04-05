@@ -1,4 +1,4 @@
-﻿namespace TextReader.Models
+﻿namespace TextReader.Models.DBs
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -20,6 +20,9 @@
 
         [Required]
         public string Title { get; set; }
+
+        [Required]
+        public int TitleNumber { get; set; }
 
         [Required]
         public DateTime CreationDateTime { get; set; }
