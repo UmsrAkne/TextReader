@@ -24,9 +24,23 @@
                 .OrderBy(record => record.Index);
         }
 
+        public IEnumerable<TitleRecord> GetTitles()
+        {
+            return Titles.OrderBy(record => record.CreationDateTime);
+        }
+
         public void AddTexts(IEnumerable<TextRecord> texts)
         {
             Target.ToList().AddRange(texts);
+        }
+
+        public void AddTitle(string title)
+        {
+            Titles.ToList().Add(new TitleRecord()
+            {
+                Title = title,
+                CreationDateTime = DateTime.Now
+            });
         }
     }
 }
