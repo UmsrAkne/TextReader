@@ -14,11 +14,14 @@
         {
             DBQueryer = new DBQueryer();
             DBQueryer.Target = Texts;
+            DBQueryer.Titles = Titles;
         }
 
         private DBQueryer DBQueryer { get; set; }
 
         private DbSet<TextRecord> Texts { get; set; }
+
+        private DbSet<TitleRecord> Titles { get; set; }
 
         public List<TextRecord> GetTexts(string title, DateTime dateTime)
         {

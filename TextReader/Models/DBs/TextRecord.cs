@@ -22,6 +22,9 @@
         public string Title { get; set; }
 
         [Required]
+        public int TitleNumber { get; set; }
+
+        [Required]
         public DateTime CreationDateTime { get; set; }
     }
 }

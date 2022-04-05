@@ -8,6 +8,8 @@
     {
         public IEnumerable<TextRecord> Target { get; set; }
 
+        public IEnumerable<TitleRecord> Titles { get; set; }
+
         public IEnumerable<TextRecord> GetTexts(string title, DateTime dateTime)
         {
             return Target
