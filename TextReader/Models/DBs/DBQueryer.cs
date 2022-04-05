@@ -17,6 +17,13 @@
                 .OrderBy(record => record.Index);
         }
 
+        public IEnumerable<TextRecord> GetTexts(int titleNumber)
+        {
+            return Target
+                .Where(record => titleNumber == record.TitleNumber)
+                .OrderBy(record => record.Index);
+        }
+
         public void AddTexts(IEnumerable<TextRecord> texts)
         {
             Target.ToList().AddRange(texts);
