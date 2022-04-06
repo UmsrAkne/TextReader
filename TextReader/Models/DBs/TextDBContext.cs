@@ -17,6 +17,10 @@
             DBQueryer.Titles = Titles;
         }
 
+        public TextDBContext(DbContextOptions<TextDBContext> options) : base(options)
+        {
+        }
+
         private DBQueryer DBQueryer { get; set; }
 
         private DbSet<TextRecord> Texts { get; set; }
@@ -28,14 +32,9 @@
             return DBQueryer.GetTexts(title, dateTime).ToList();
         }
 
-        public void AddTexts(List<TextRecord> texts)
+        public static DbContextOptions<TextDBContext> CreateDbContextOptions()
         {
-            DBQueryer.AddTexts(texts);
-            SaveChanges();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
+            var optionsBuilder = new DbContextOptionsBuilder<TextDBContext>();
             string databaseFileName = "TextDB.sqlite";
 
             if (!File.Exists(databaseFileName))
@@ -44,7 +43,17 @@
             }
 
             var connectionString = new SqliteConnectionStringBuilder { DataSource = databaseFileName }.ToString();
-            optionsBuilder.UseSqlite(new SQLiteConnection(connectionString));
+            return optionsBuilder.UseSqlite(new SQLiteConnection(connectionString)).Options;
+        }
+
+        public void AddTexts(List<TextRecord> texts)
+        {
+            DBQueryer.AddTexts(texts);
+            SaveChanges();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
         }
     }
 }

@@ -7,7 +7,7 @@
 
     public class MainWindowViewModel : BindableBase
     {
-        private readonly TextDBContext databaseContext = new TextDBContext();
+        private readonly TextDBContext databaseContext = new TextDBContext(TextDBContext.CreateDbContextOptions());
 
         private string title = "Prism Application";
 
