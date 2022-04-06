@@ -27,11 +27,6 @@
 
         private DbSet<TitleRecord> Titles { get; set; }
 
-        public List<TextRecord> GetTexts(string title, DateTime dateTime)
-        {
-            return DBQueryer.GetTexts(title, dateTime).ToList();
-        }
-
         public static DbContextOptions<TextDBContext> CreateDbContextOptions()
         {
             var optionsBuilder = new DbContextOptionsBuilder<TextDBContext>();
@@ -46,9 +41,22 @@
             return optionsBuilder.UseSqlite(new SQLiteConnection(connectionString)).Options;
         }
 
+        public List<TextRecord> GetTexts(string title, DateTime dateTime)
+        {
+            return DBQueryer.GetTexts(title, dateTime).ToList();
+        }
+
+        public List<TextRecord> GetTexts(int titleNumber)
+        {
+            return Texts
+            .Where(record => titleNumber == record.TitleNumber)
+            .OrderBy(record => record.Index)
+            .ToList();
+        }
+
         public void AddTexts(List<TextRecord> texts)
         {
-            DBQueryer.AddTexts(texts);
+            Texts.AddRange(texts);
             SaveChanges();
         }
 
