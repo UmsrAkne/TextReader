@@ -12,30 +12,19 @@
     {
         public TextDBContext()
         {
-            DBQueryer = new DBQueryer();
-            DBQueryer.Target = Texts;
-            DBQueryer.Titles = Titles;
         }
 
-        private DBQueryer DBQueryer { get; set; }
+        public TextDBContext(DbContextOptions<TextDBContext> options) : base(options)
+        {
+        }
 
         private DbSet<TextRecord> Texts { get; set; }
 
         private DbSet<TitleRecord> Titles { get; set; }
 
-        public List<TextRecord> GetTexts(string title, DateTime dateTime)
+        public static DbContextOptions<TextDBContext> CreateDbContextOptions()
         {
-            return DBQueryer.GetTexts(title, dateTime).ToList();
-        }
-
-        public void AddTexts(List<TextRecord> texts)
-        {
-            DBQueryer.AddTexts(texts);
-            SaveChanges();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
+            var optionsBuilder = new DbContextOptionsBuilder<TextDBContext>();
             string databaseFileName = "TextDB.sqlite";
 
             if (!File.Exists(databaseFileName))
@@ -44,7 +33,39 @@
             }
 
             var connectionString = new SqliteConnectionStringBuilder { DataSource = databaseFileName }.ToString();
-            optionsBuilder.UseSqlite(new SQLiteConnection(connectionString));
+            return optionsBuilder.UseSqlite(new SQLiteConnection(connectionString)).Options;
+        }
+
+        public List<TextRecord> GetTexts(int titleNumber)
+        {
+            return Texts
+            .Where(record => titleNumber == record.TitleNumber)
+            .OrderBy(record => record.Index)
+            .ToList();
+        }
+
+        public void AddTexts(List<TextRecord> texts)
+        {
+            Texts.AddRange(texts);
+            SaveChanges();
+        }
+
+        public IEnumerable<TitleRecord> GetTitles()
+        {
+            return Titles.OrderBy(record => record.CreationDateTime);
+        }
+
+        public void AddTitle(string title)
+        {
+            Titles.ToList().Add(new TitleRecord()
+            {
+                Title = title,
+                CreationDateTime = DateTime.Now
+            });
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
         }
     }
 }
