@@ -130,7 +130,6 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Models\DBs\DBQueryerTests.cs" />
     <Compile Include="Models\DBs\TextDBContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
