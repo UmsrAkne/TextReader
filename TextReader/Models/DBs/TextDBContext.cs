@@ -60,6 +60,20 @@
             SaveChanges();
         }
 
+        public IEnumerable<TitleRecord> GetTitles()
+        {
+            return Titles.OrderBy(record => record.CreationDateTime);
+        }
+
+        public void AddTitle(string title)
+        {
+            Titles.ToList().Add(new TitleRecord()
+            {
+                Title = title,
+                CreationDateTime = DateTime.Now
+            });
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
         }
