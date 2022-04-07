@@ -50,18 +50,20 @@
             SaveChanges();
         }
 
-        public IEnumerable<TitleRecord> GetTitles()
+        public List<TitleRecord> GetTitles()
         {
-            return Titles.OrderBy(record => record.CreationDateTime);
+            return Titles.OrderBy(record => record.CreationDateTime).ToList();
         }
 
         public void AddTitle(string title)
         {
-            Titles.ToList().Add(new TitleRecord()
+            Titles.Add(new TitleRecord()
             {
                 Title = title,
                 CreationDateTime = DateTime.Now
             });
+
+            SaveChanges();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
