@@ -15,6 +15,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resource/TextItemTemplate.xaml" />
+                <ResourceDictionary Source="../Resource/TitleItemTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -25,6 +26,11 @@
 
     <Grid>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
@@ -33,12 +39,22 @@
 
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
 
-        <Menu Grid.Row="0">
+        <Menu
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
             <MenuItem Header="File" />
         </Menu>
 
         <ListView
             Grid.Row="1"
+            Grid.Column="0"
+            ItemTemplate="{StaticResource ResourceKey=TitleItemTemplate}"
+            ItemsSource="{Binding Titles}" />
+
+        <ListView
+            Grid.Row="1"
+            Grid.Column="1"
             ItemTemplate="{StaticResource ResourceKey=TextItemTemplate}"
             ItemsSource="{Binding Texts}" />
 
