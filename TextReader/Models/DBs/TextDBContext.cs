@@ -12,16 +12,11 @@
     {
         public TextDBContext()
         {
-            DBQueryer = new DBQueryer();
-            DBQueryer.Target = Texts;
-            DBQueryer.Titles = Titles;
         }
 
         public TextDBContext(DbContextOptions<TextDBContext> options) : base(options)
         {
         }
-
-        private DBQueryer DBQueryer { get; set; }
 
         private DbSet<TextRecord> Texts { get; set; }
 
@@ -39,11 +34,6 @@
 
             var connectionString = new SqliteConnectionStringBuilder { DataSource = databaseFileName }.ToString();
             return optionsBuilder.UseSqlite(new SQLiteConnection(connectionString)).Options;
-        }
-
-        public List<TextRecord> GetTexts(string title, DateTime dateTime)
-        {
-            return DBQueryer.GetTexts(title, dateTime).ToList();
         }
 
         public List<TextRecord> GetTexts(int titleNumber)

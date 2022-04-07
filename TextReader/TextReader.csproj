@@ -68,7 +68,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\DBs\DBQueryer.cs" />
     <Compile Include="Models\DBs\TitleRecord.cs" />
     <Compile Include="Models\DropBehavior.cs" />
     <Compile Include="Models\IText.cs" />
