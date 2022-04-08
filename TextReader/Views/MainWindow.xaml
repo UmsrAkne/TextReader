@@ -50,7 +50,8 @@
             Grid.Row="1"
             Grid.Column="0"
             ItemTemplate="{StaticResource ResourceKey=TitleItemTemplate}"
-            ItemsSource="{Binding Titles}" />
+            ItemsSource="{Binding Titles}"
+            SelectedIndex="{Binding SelectionTitleIndex}" />
 
         <ListView
             Grid.Row="1"
