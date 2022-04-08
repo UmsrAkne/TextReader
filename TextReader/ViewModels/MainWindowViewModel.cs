@@ -11,10 +11,10 @@
         private readonly TextDBContext databaseContext = new TextDBContext(TextDBContext.CreateDbContextOptions());
 
         private string title = "Prism Application";
-
         private List<TitleRecord> titles = new List<TitleRecord>();
-
         private List<TextRecord> texts = new List<TextRecord>();
+
+        private int selectionTitleIndex;
 
         public MainWindowViewModel()
         {
@@ -36,6 +36,16 @@
         public List<TextRecord> Texts { get => texts; set => SetProperty(ref texts, value); }
 
         public List<TitleRecord> Titles { get => titles; set => SetProperty(ref titles, value); }
+
+        public int SelectionTitleIndex
+        {
+            get => selectionTitleIndex;
+            set 
+            {
+                SetProperty(ref selectionTitleIndex, value);
+                Texts = databaseContext.GetTexts(Titles[SelectionTitleIndex].Id);
+            }
+        }
 
         /// <summary>
         /// 入力されたテキストをタイトルと共にデータベースに書き込みます。
