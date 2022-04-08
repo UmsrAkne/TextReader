@@ -55,15 +55,22 @@
             return Titles.OrderBy(record => record.CreationDateTime).ToList();
         }
 
-        public void AddTitle(string title)
+        public int AddTitle(string title)
         {
-            Titles.Add(new TitleRecord()
+            var titleRecord = new TitleRecord()
             {
                 Title = title,
                 CreationDateTime = DateTime.Now
-            });
+            };
+
+            Titles.Add(titleRecord);
 
             SaveChanges();
+
+            // Id に関しては EntityFW が自動でインクリメントで値を振る。
+            // titleRecord の中の値はそれに連動して更新されるので、直前に入力したレコードの id が取得できる。
+
+            return titleRecord.Id;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
