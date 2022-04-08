@@ -63,9 +63,9 @@ namespace TextReader.Models.DBs.Tests
             var db = new TextDBContext(option);
             db.Database.EnsureCreated();
 
-            db.AddTitle("title1");
-            db.AddTitle("title2");
-            db.AddTitle("title3");
+            Assert.AreEqual(1, db.AddTitle("title1"));
+            Assert.AreEqual(2, db.AddTitle("title2"));
+            Assert.AreEqual(3, db.AddTitle("title3"));
 
             var titles = db.GetTitles();
 
