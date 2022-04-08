@@ -14,16 +14,17 @@
 
         private List<TitleRecord> titles = new List<TitleRecord>();
 
-        private List<IText> texts = new List<IText>()
-        {
-            new PlainText("sampleText1"),
-            new PlainText("sampleText2"),
-            new PlainText("sampleText3")
-        };
+        private List<TextRecord> texts = new List<TextRecord>();
 
         public MainWindowViewModel()
         {
             databaseContext.Database.EnsureCreated();
+            Titles = databaseContext.GetTitles().ToList();
+
+            if (Titles.Count != 0)
+            {
+                Texts = databaseContext.GetTexts(Titles.First().Id);
+            }
         }
 
         public string Title
@@ -32,7 +33,7 @@
             set { SetProperty(ref title, value); }
         }
 
-        public List<IText> Texts { get => texts; set => SetProperty(ref texts, value); }
+        public List<TextRecord> Texts { get => texts; set => SetProperty(ref texts, value); }
 
         public List<TitleRecord> Titles { get => titles; set => SetProperty(ref titles, value); }
 
