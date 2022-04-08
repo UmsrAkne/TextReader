@@ -19,7 +19,7 @@
         public bool Read { get; set; }
 
         [Required]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         [Required]
         public int TitleNumber { get; set; }

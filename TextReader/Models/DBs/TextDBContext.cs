@@ -69,7 +69,6 @@
 
             // Id に関しては EntityFW が自動でインクリメントで値を振る。
             // titleRecord の中の値はそれに連動して更新されるので、直前に入力したレコードの id が取得できる。
-
             return titleRecord.Id;
         }
 

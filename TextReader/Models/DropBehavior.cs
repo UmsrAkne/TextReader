@@ -1,6 +1,9 @@
 ﻿namespace TextReader.Models
 {
+    using System;
+    using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Windows;
     using Microsoft.Xaml.Behaviors;
     using TextReader.ViewModels;
@@ -30,6 +33,8 @@
             // ファイルパスの一覧の配列
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             var vm = ((Window)sender).DataContext as MainWindowViewModel;
+            var texts = File.ReadAllLines(files[0]).ToList();
+            vm.WriteTextFile(Path.GetFileName(files[0]), texts);
         }
 
         private void AssociatedObject_PreviewDragOver(object sender, DragEventArgs e)
