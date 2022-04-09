@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TextReader.Models.DBs;
-
-namespace TextReader.Models.DBs.Tests
+﻿namespace TextReader.Models.DBs.Tests
 {
     using System;
     using System.Collections.Generic;
