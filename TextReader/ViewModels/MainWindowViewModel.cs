@@ -26,9 +26,6 @@
             {
                 Texts = databaseContext.GetTexts(Titles.First().Id);
             }
-
-            var b = new BouyomiTalker();
-            b.Talk("テストでしゃべっています");
         }
 
         public string Title
