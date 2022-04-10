@@ -5,6 +5,7 @@
     using Prism.Mvvm;
     using TextReader.Models;
     using TextReader.Models.DBs;
+    using TextReader.Models.Talkers;
 
     public class MainWindowViewModel : BindableBase
     {
