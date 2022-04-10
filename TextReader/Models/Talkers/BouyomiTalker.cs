@@ -7,14 +7,14 @@
 
     public class BouyomiTalker : Italker
     {
-        public event EventHandler TalkStopped;
-
         private DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
 
         public BouyomiTalker()
         {
             timer.Tick += Timer_Tick;
         }
+
+        public event EventHandler TalkStopped;
 
         public void Stop()
         {
@@ -32,9 +32,9 @@
             var process = ExecuteRemoteTalk($"/GetNowPlaying");
             process.WaitForExit();
 
-            // GetNowPlaying を実行した時、音声を再生中ならば 1 、再生中でなければ 0 が終了コードで返ってくる
+            /// GetNowPlaying を実行した時、音声を再生中ならば 1 、再生中でなければ 0 が終了コードで返ってくる
 
-            if(process.ExitCode == 0)
+            if (process.ExitCode == 0)
             {
                 timer.Stop();
                 TalkStopped?.Invoke(this, EventArgs.Empty);
