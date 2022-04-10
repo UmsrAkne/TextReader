@@ -1,4 +1,4 @@
-﻿namespace TextReader.Models
+﻿namespace TextReader.Models.Talkers
 {
     using System.Diagnostics;
 
