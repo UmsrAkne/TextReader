@@ -5,6 +5,7 @@
     using Prism.Mvvm;
     using TextReader.Models;
     using TextReader.Models.DBs;
+    using TextReader.Models.Talkers;
 
     public class MainWindowViewModel : BindableBase
     {
@@ -25,6 +26,9 @@
             {
                 Texts = databaseContext.GetTexts(Titles.First().Id);
             }
+
+            var b = new BouyomiTalker();
+            b.Talk("テストでしゃべっています");
         }
 
         public string Title
