@@ -1,9 +1,17 @@
 ﻿namespace TextReader.Models.Talkers
 {
+    using System;
     using System.Diagnostics;
 
-    public class BouyomiTalker
+    public class BouyomiTalker : Italker
     {
+        public event EventHandler TalkStopped;
+
+        public void Stop()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Talk(string str)
         {
             var process = new Process();
