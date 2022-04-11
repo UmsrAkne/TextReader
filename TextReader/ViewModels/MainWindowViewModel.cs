@@ -27,6 +27,9 @@
             {
                 Texts = databaseContext.GetTexts(Titles.First().Id);
             }
+
+            player.Talker = new BouyomiTalker();
+            player.Texts = Texts;
         }
 
         public string Title
