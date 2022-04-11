@@ -46,6 +46,13 @@ namespace TextReader.Models
             }
         }
 
+        public void Stop()
+        {
+            talker.Stop();
+            talker.TalkStopped -= PlayNext;
+            Index = 0;
+        }
+
         public void Pause()
         {
             talker.Stop();
