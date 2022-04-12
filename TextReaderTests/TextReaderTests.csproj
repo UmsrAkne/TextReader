@@ -131,6 +131,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Models\DBs\TextDBContextTests.cs" />
+    <Compile Include="Models\PlayerTests.cs" />
+    <Compile Include="Models\Talkers\DummyTalker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
