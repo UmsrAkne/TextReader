@@ -33,6 +33,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
@@ -46,20 +47,44 @@
             <MenuItem Header="File" />
         </Menu>
 
-        <ListView
+        <Border
             Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
+
+            <StackPanel Margin="0,3" Orientation="Horizontal">
+
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Padding" Value="15,1" />
+                        <Setter Property="Margin" Value="5,0" />
+                        <Setter Property="Background" Value="WhiteSmoke" />
+                    </Style>
+                </StackPanel.Resources>
+
+                <Button Content="Play" />
+                <Button Content="Stop" />
+            </StackPanel>
+
+        </Border>
+
+        <ListView
+            Grid.Row="2"
             Grid.Column="0"
             ItemTemplate="{StaticResource ResourceKey=TitleItemTemplate}"
             ItemsSource="{Binding Titles}"
             SelectedIndex="{Binding SelectionTitleIndex}" />
 
         <ListView
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="1"
             ItemTemplate="{StaticResource ResourceKey=TextItemTemplate}"
             ItemsSource="{Binding Texts}" />
 
-        <StatusBar Grid.Row="2" Height="20" />
+        <StatusBar
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Height="20" />
 
     </Grid>
 </Window>

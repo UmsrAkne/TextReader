@@ -10,6 +10,7 @@
     public class MainWindowViewModel : BindableBase
     {
         private readonly TextDBContext databaseContext = new TextDBContext(TextDBContext.CreateDbContextOptions());
+        private readonly Player player = new Player();
 
         private string title = "Prism Application";
         private List<TitleRecord> titles = new List<TitleRecord>();
@@ -26,6 +27,9 @@
             {
                 Texts = databaseContext.GetTexts(Titles.First().Id);
             }
+
+            player.Talker = new BouyomiTalker();
+            player.Texts = Texts;
         }
 
         public string Title

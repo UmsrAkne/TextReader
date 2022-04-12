@@ -72,6 +72,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Talkers\BouyomiTalker.cs" />
     <Compile Include="Models\DBs\TitleRecord.cs" />
     <Compile Include="Models\DropBehavior.cs" />
