@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface Italker
+    public interface ITalker
     {
         event EventHandler TalkStopped;
 

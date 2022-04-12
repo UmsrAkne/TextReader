@@ -80,7 +80,7 @@
     <Compile Include="Models\PlainText.cs" />
     <Compile Include="Models\DBs\TextDBContext.cs" />
     <Compile Include="Models\DBs\TextRecord.cs" />
-    <Compile Include="Models\Talkers\Italker.cs" />
+    <Compile Include="Models\Talkers\ITalker.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
