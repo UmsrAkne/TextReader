@@ -5,7 +5,7 @@
     using System.Threading;
     using System.Windows.Threading;
 
-    public class BouyomiTalker : Italker
+    public class BouyomiTalker : ITalker
     {
         private DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
 

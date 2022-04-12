@@ -14,11 +14,11 @@ namespace TextReader.Models
 
     public class Player
     {
-        private Italker talker;
+        private ITalker talker;
         private List<TextRecord> texts;
         private int index;
 
-        public Italker Talker
+        public ITalker Talker
         {
             get => talker;
             set => talker = value;
