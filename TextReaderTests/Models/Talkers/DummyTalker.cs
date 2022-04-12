@@ -7,14 +7,25 @@
     {
         public event EventHandler TalkStopped;
 
+        public string LastReadMessage { get; private set; } = string.Empty;
+
+        public bool Talking { get; private set; }
+
         public void Stop()
         {
-            throw new NotImplementedException();
+            Talking = false;
         }
 
         public void Talk(string message)
         {
-            throw new NotImplementedException();
+            LastReadMessage = message;
+            Talking = true;
         }
+
+        public void FinishTalk()
+        {
+            Talking = false;
+            TalkStopped?.Invoke(this, EventArgs.Empty);
+        } 
     }
 }
