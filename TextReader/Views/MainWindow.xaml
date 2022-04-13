@@ -79,8 +79,27 @@
             Grid.Row="2"
             Grid.Column="1"
             HorizontalContentAlignment="Stretch"
+            AlternationCount="2"
             ItemTemplate="{StaticResource ResourceKey=TextItemTemplate}"
-            ItemsSource="{Binding Texts}" />
+            ItemsSource="{Binding Texts}">
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+
+                    <Style.Triggers>
+                        <!--  偶数行の背景色  -->
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                            <Setter Property="Background" Value="WhiteSmoke" />
+                        </Trigger>
+                        <!--  選択行の背景色  -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{x:Static SystemColors.HighlightBrush}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+        </ListView>
 
         <StatusBar
             Grid.Row="3"
