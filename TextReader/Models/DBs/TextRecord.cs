@@ -25,6 +25,9 @@
         public int TitleNumber { get; set; }
 
         [Required]
+        public int ListenCount { get; set; }
+
+        [Required]
         public DateTime CreationDateTime { get; set; }
     }
 }
