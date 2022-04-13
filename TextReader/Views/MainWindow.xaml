@@ -16,6 +16,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resource/TextItemTemplate.xaml" />
                 <ResourceDictionary Source="../Resource/TitleItemTemplate.xaml" />
+                <ResourceDictionary Source="../Resource/CustomButtonTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -62,8 +63,8 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <Button Content="Play" />
-                <Button Content="Stop" />
+                <Button Content="Play" Template="{StaticResource buttonTemplate}" />
+                <Button Content="Stop" Template="{StaticResource buttonTemplate}" />
             </StackPanel>
 
         </Border>
@@ -78,8 +79,28 @@
         <ListView
             Grid.Row="2"
             Grid.Column="1"
+            HorizontalContentAlignment="Stretch"
+            AlternationCount="2"
             ItemTemplate="{StaticResource ResourceKey=TextItemTemplate}"
-            ItemsSource="{Binding Texts}" />
+            ItemsSource="{Binding Texts}">
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+
+                    <Style.Triggers>
+                        <!--  偶数行の背景色  -->
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                            <Setter Property="Background" Value="WhiteSmoke" />
+                        </Trigger>
+                        <!--  選択行の背景色  -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{x:Static SystemColors.HighlightBrush}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+        </ListView>
 
         <StatusBar
             Grid.Row="3"
