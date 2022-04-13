@@ -78,6 +78,7 @@
         <ListView
             Grid.Row="2"
             Grid.Column="1"
+            HorizontalContentAlignment="Stretch"
             ItemTemplate="{StaticResource ResourceKey=TextItemTemplate}"
             ItemsSource="{Binding Texts}" />
 
