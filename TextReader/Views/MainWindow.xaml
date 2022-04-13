@@ -16,6 +16,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resource/TextItemTemplate.xaml" />
                 <ResourceDictionary Source="../Resource/TitleItemTemplate.xaml" />
+                <ResourceDictionary Source="../Resource/CustomButtonTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -62,8 +63,8 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <Button Content="Play" />
-                <Button Content="Stop" />
+                <Button Content="Play" Template="{StaticResource buttonTemplate}" />
+                <Button Content="Stop" Template="{StaticResource buttonTemplate}" />
             </StackPanel>
 
         </Border>
