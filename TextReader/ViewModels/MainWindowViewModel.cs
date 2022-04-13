@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Prism.Commands;
     using Prism.Mvvm;
     using TextReader.Models;
     using TextReader.Models.DBs;
@@ -45,6 +46,16 @@
                 Texts = databaseContext.GetTexts(Titles[SelectionTitleIndex].Id);
             }
         }
+
+        public DelegateCommand PlayCommand => new DelegateCommand(() =>
+        {
+            player.Play();
+        });
+
+        public DelegateCommand StopCommand => new DelegateCommand(() =>
+        {
+            player.Stop();
+        });
 
         /// <summary>
         /// 入力されたテキストをタイトルと共にデータベースに書き込みます。

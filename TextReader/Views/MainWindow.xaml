@@ -63,8 +63,15 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <Button Content="Play" Template="{StaticResource buttonTemplate}" />
-                <Button Content="Stop" Template="{StaticResource buttonTemplate}" />
+                <Button
+                    Command="{Binding PlayCommand}"
+                    Content="Play"
+                    Template="{StaticResource buttonTemplate}" />
+
+                <Button
+                    Command="{Binding StopCommand}"
+                    Content="Stop"
+                    Template="{StaticResource buttonTemplate}" />
             </StackPanel>
 
         </Border>
