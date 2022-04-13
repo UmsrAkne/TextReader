@@ -23,21 +23,18 @@
             {
                 new TextRecord()
                 {
-                    Title = "title1",
                     TitleNumber = 0,
                     Text = "text1",
                     CreationDateTime = new DateTime(2000, 1, 1)
                 },
                 new TextRecord()
                 {
-                    Title = "title1",
                     TitleNumber = 0,
                     Text = "text2",
                     CreationDateTime = new DateTime(2000, 1, 1)
                 },
                 new TextRecord()
                 {
-                    Title = "title2",
                     TitleNumber = 1,
                     Text = "text3",
                     CreationDateTime = new DateTime(2000, 1, 1)

@@ -19,10 +19,10 @@
         public bool Read { get; set; }
 
         [Required]
-        public string Title { get; set; } = string.Empty;
+        public int TitleNumber { get; set; }
 
         [Required]
-        public int TitleNumber { get; set; }
+        public int ListenCount { get; set; }
 
         [Required]
         public DateTime CreationDateTime { get; set; }
