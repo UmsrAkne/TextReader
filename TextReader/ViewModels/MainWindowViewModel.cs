@@ -21,13 +21,7 @@
         public MainWindowViewModel()
         {
             databaseContext.Database.EnsureCreated();
-            Titles = databaseContext.GetTitles().ToList();
-
-            if (Titles.Count != 0)
-            {
-                Texts = databaseContext.GetTexts(Titles.First().Id);
-            }
-
+            UpdateLists();
             player.Talker = new BouyomiTalker();
             player.Texts = Texts;
         }
@@ -45,7 +39,7 @@
         public int SelectionTitleIndex
         {
             get => selectionTitleIndex;
-            set 
+            set
             {
                 SetProperty(ref selectionTitleIndex, value);
                 Texts = databaseContext.GetTexts(Titles[SelectionTitleIndex].Id);
@@ -72,6 +66,17 @@
             }).ToList();
 
             databaseContext.AddTexts(records);
+            UpdateLists();
+        }
+
+        private void UpdateLists()
+        {
+            Titles = databaseContext.GetTitles();
+
+            if (Titles.Count > 0)
+            {
+                Texts = databaseContext.GetTexts(Titles.First().Id);
+            }
         }
     }
 }
