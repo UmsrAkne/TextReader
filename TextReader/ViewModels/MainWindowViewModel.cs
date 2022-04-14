@@ -25,6 +25,10 @@
             UpdateLists();
             player.Talker = new BouyomiTalker();
             player.Texts = Texts;
+
+            // player が読み上げを開始した際、テキストレコードの視聴回数のカウンターがインクリメントされる。
+            // それをデータベースに反映させるため、イベントハンドラをセットする。
+            player.PlayStarted += (sender, e) => databaseContext.SaveChanges();
         }
 
         public string Title

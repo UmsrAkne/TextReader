@@ -23,6 +23,9 @@
             Assert.AreEqual(dummyTalker.LastReadMessage, string.Empty);
             Assert.IsFalse(dummyTalker.Talking);
 
+            Assert.AreEqual(player.Texts[0].ListenCount, 0);
+            Assert.AreEqual(player.Texts[1].ListenCount, 0);
+
             player.Play();
 
             Assert.AreEqual(dummyTalker.LastReadMessage, "text1");
@@ -35,6 +38,9 @@
 
             Assert.AreEqual(dummyTalker.LastReadMessage, "text2");
             Assert.IsFalse(dummyTalker.Talking, "読み上げは終了している");
+
+            Assert.AreEqual(player.Texts[0].ListenCount, 1);
+            Assert.AreEqual(player.Texts[1].ListenCount, 1);
         }
     }
 }
