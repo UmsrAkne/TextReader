@@ -1,6 +1,7 @@
 ﻿namespace TextReader.ViewModels
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using Prism.Commands;
     using Prism.Mvvm;
@@ -15,7 +16,7 @@
 
         private string title = "Prism Application";
         private List<TitleRecord> titles = new List<TitleRecord>();
-        private List<TextRecord> texts = new List<TextRecord>();
+        private ObservableCollection<TextRecord> texts = new ObservableCollection<TextRecord>();
 
         private int selectionTitleIndex;
 
@@ -24,7 +25,7 @@
             databaseContext.Database.EnsureCreated();
             UpdateLists();
             player.Talker = new BouyomiTalker();
-            player.Texts = Texts;
+            player.Texts = new List<TextRecord>(Texts);
 
             // player が読み上げを開始した際、テキストレコードの視聴回数のカウンターがインクリメントされる。
             // それをデータベースに反映させるため、イベントハンドラをセットする。
@@ -37,7 +38,7 @@
             set { SetProperty(ref title, value); }
         }
 
-        public List<TextRecord> Texts { get => texts; set => SetProperty(ref texts, value); }
+        public ObservableCollection<TextRecord> Texts { get => texts; set => SetProperty(ref texts, value); }
 
         public List<TitleRecord> Titles { get => titles; set => SetProperty(ref titles, value); }
 
@@ -47,7 +48,7 @@
             set
             {
                 SetProperty(ref selectionTitleIndex, value);
-                Texts = databaseContext.GetTexts(Titles[SelectionTitleIndex].Id);
+                Texts = new ObservableCollection<TextRecord>(databaseContext.GetTexts(Titles[SelectionTitleIndex].Id));
             }
         }
 
@@ -90,7 +91,7 @@
 
             if (Titles.Count > 0)
             {
-                Texts = databaseContext.GetTexts(Titles.First().Id);
+                Texts = new ObservableCollection<TextRecord>(databaseContext.GetTexts(Titles.First().Id));
             }
         }
     }

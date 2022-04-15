@@ -42,5 +42,35 @@
             Assert.AreEqual(player.Texts[0].ListenCount, 1);
             Assert.AreEqual(player.Texts[1].ListenCount, 1);
         }
+
+        [TestMethod]
+        public void IsPlayingが正常に設定されているかのテスト()
+        {
+            var dummyTalker = new DummyTalker();
+            var player = new Player() { Talker = dummyTalker };
+
+            var texts = new List<TextRecord>()
+            {
+                new TextRecord() { Text = "text1" },
+                new TextRecord() { Text = "text2" }
+            };
+
+            player.Texts = texts;
+
+            Assert.IsFalse(texts[0].IsPlaying);
+            Assert.IsFalse(texts[1].IsPlaying);
+
+            player.Play();
+            Assert.IsTrue(texts[0].IsPlaying);
+            Assert.IsFalse(texts[1].IsPlaying);
+            dummyTalker.FinishTalk();
+
+            Assert.IsFalse(texts[0].IsPlaying);
+            Assert.IsTrue(texts[1].IsPlaying);
+            dummyTalker.FinishTalk();
+            
+            Assert.IsFalse(texts[0].IsPlaying);
+            Assert.IsFalse(texts[1].IsPlaying);
+        }
     }
 }

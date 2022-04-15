@@ -17,6 +17,7 @@ namespace TextReader.Models
         private ITalker talker;
         private List<TextRecord> texts;
         private int index;
+        private TextRecord currentRecord;
 
         public event EventHandler PlayStarted;
 
@@ -40,11 +41,18 @@ namespace TextReader.Models
 
         public void Play()
         {
+            if (currentRecord != null)
+            {
+                currentRecord.IsPlaying = false;
+            }
+
             if (Texts.Count() > Index)
             {
-                var currentRecord = Texts[Index];
+                currentRecord = Texts[Index];
                 talker.Talk(currentRecord.Text);
                 currentRecord.ListenCount++;
+                currentRecord.IsPlaying = true;
+
                 PlayStarted?.Invoke(this, EventArgs.Empty);
                 Index++;
                 talker.TalkStopped += PlayNext;
