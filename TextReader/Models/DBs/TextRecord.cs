@@ -3,9 +3,12 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Prism.Mvvm;
 
-    public class TextRecord
+    public class TextRecord : BindableBase 
     {
+        private bool isPlaying;
+
         [Key]
         [Required]
         public int Id { get; set; }
@@ -29,6 +32,6 @@
         public DateTime CreationDateTime { get; set; }
 
         [NotMapped]
-        public bool IsPlaying { get; set; }
+        public bool IsPlaying { get => isPlaying; set => SetProperty(ref isPlaying, value); }
     }
 }

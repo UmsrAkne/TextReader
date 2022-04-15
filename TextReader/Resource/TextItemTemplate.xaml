@@ -8,6 +8,17 @@
     <DataTemplate x:Key="TextItemTemplate">
         <Grid>
 
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsPlaying}" Value="True">
+                            <Setter Property="Background" Value="MistyRose" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+            </Grid.Style>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition />
