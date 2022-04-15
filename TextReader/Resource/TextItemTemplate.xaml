@@ -11,6 +11,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition />
+                <ColumnDefinition Width="40" />
             </Grid.ColumnDefinitions>
 
             <Grid.Resources>
@@ -27,6 +28,10 @@
 
             <Border Grid.Column="1">
                 <TextBlock Text="{Binding Text}" />
+            </Border>
+
+            <Border Grid.Column="2">
+                <TextBlock Text="{Binding ListenCount}" />
             </Border>
 
         </Grid>
