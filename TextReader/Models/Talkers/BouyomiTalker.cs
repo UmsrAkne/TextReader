@@ -61,6 +61,7 @@
             var process = new Process();
             process.StartInfo.FileName = @"BouyomiChan\RemoteTalk\RemoteTalk.exe";
             process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;
 
             process.StartInfo.Arguments = argument;
