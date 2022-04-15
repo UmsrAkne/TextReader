@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class TextRecord
     {
@@ -26,5 +27,8 @@
 
         [Required]
         public DateTime CreationDateTime { get; set; }
+
+        [NotMapped]
+        public bool IsPlaying { get; set; }
     }
 }
