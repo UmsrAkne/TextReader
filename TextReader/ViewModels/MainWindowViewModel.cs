@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
     using Prism.Commands;
     using Prism.Mvvm;
@@ -70,6 +71,8 @@
             player.Index = SelectionTextIndex;
             player.Play();
         });
+
+        public DelegateCommand RunBouyomiChanCommand => new DelegateCommand(() => Process.Start(@"BouyomiChan\BouyomiChan.exe"));
 
         /// <summary>
         /// 入力されたテキストをタイトルと共にデータベースに書き込みます。
