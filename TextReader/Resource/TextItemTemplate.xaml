@@ -24,7 +24,7 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
-                <ColumnDefinition />
+                <ColumnDefinition Width="450" />
                 <ColumnDefinition Width="40" />
             </Grid.ColumnDefinitions>
 
@@ -42,7 +42,7 @@
             </Border>
 
             <Border Grid.Column="1">
-                <TextBlock Text="{Binding Text}" />
+                <TextBlock Text="{Binding Text}" TextTrimming="CharacterEllipsis" />
             </Border>
 
             <Border Grid.Column="2">
