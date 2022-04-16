@@ -89,7 +89,8 @@
             HorizontalContentAlignment="Stretch"
             AlternationCount="2"
             ItemTemplate="{StaticResource ResourceKey=TextItemTemplate}"
-            ItemsSource="{Binding Texts}">
+            ItemsSource="{Binding Texts}"
+            SelectedIndex="{Binding SelectionTextIndex}">
 
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">

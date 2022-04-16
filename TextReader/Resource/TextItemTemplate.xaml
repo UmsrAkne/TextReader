@@ -7,6 +7,9 @@
 
     <DataTemplate x:Key="TextItemTemplate">
         <Grid>
+            <Grid.InputBindings>
+                <MouseBinding Command="{Binding DataContext.SetStartIndexCommand, RelativeSource={RelativeSource AncestorType=Window}}" MouseAction="LeftDoubleClick" />
+            </Grid.InputBindings>
 
             <Grid.Style>
                 <Style TargetType="Grid">

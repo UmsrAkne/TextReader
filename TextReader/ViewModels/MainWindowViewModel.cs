@@ -19,6 +19,7 @@
         private ObservableCollection<TextRecord> texts = new ObservableCollection<TextRecord>();
 
         private int selectionTitleIndex;
+        private int selectionTextIndex;
 
         public MainWindowViewModel()
         {
@@ -52,6 +53,8 @@
             }
         }
 
+        public int SelectionTextIndex { get => selectionTextIndex; set => SetProperty(ref selectionTextIndex, value); }
+
         public DelegateCommand PlayCommand => new DelegateCommand(() =>
         {
             player.Play();
@@ -60,6 +63,12 @@
         public DelegateCommand StopCommand => new DelegateCommand(() =>
         {
             player.Stop();
+        });
+
+        public DelegateCommand SetStartIndexCommand => new DelegateCommand(() =>
+        {
+            player.Index = SelectionTextIndex;
+            player.Play();
         });
 
         /// <summary>
