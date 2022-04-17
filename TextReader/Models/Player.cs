@@ -46,7 +46,7 @@ namespace TextReader.Models
                 currentRecord.IsPlaying = false;
             }
 
-            if (Texts.Count() > Index)
+            if (Texts.Count() > Index && Talker.CanPlay)
             {
                 currentRecord = Texts[Index];
                 talker.Talk(currentRecord.Text);
