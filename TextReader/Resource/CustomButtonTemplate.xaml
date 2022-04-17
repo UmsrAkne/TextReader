@@ -23,6 +23,10 @@
                 <Setter TargetName="border" Property="Background" Value="SkyBlue" />
             </Trigger>
 
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="border" Property="Opacity" Value="0.5" />
+            </Trigger>
+
         </ControlTemplate.Triggers>
     </ControlTemplate>
 </ResourceDictionary>
