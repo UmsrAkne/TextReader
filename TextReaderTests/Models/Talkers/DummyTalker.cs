@@ -11,7 +11,7 @@
 
         public bool Talking { get; private set; }
 
-        public bool CanPlay { get; set; }
+        public bool CanPlay { get; set; } = true;
 
         public void Stop()
         {
