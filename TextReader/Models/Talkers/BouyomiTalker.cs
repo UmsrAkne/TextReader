@@ -1,7 +1,9 @@
 ﻿namespace TextReader.Models.Talkers
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Threading;
     using System.Windows.Threading;
 
@@ -18,13 +20,7 @@
 
         public event EventHandler TalkStopped;
 
-        public bool CanPlay 
-        { 
-            get
-            {
-                return true;
-            }
-        }
+        public bool CanPlay => Process.GetProcessesByName("BouyomiChan").Length > 0;
 
         public void Stop()
         {
