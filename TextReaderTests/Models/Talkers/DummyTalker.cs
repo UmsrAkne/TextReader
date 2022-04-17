@@ -11,6 +11,8 @@
 
         public bool Talking { get; private set; }
 
+        public bool CanPlay { get; set; }
+
         public void Stop()
         {
             Talking = false;
@@ -26,6 +28,6 @@
         {
             Talking = false;
             TalkStopped?.Invoke(this, EventArgs.Empty);
-        } 
+        }
     }
 }

@@ -18,6 +18,14 @@
 
         public event EventHandler TalkStopped;
 
+        public bool CanPlay 
+        { 
+            get
+            {
+                return true;
+            }
+        }
+
         public void Stop()
         {
             throw new NotImplementedException();
