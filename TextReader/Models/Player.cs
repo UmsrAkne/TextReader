@@ -20,6 +20,7 @@ namespace TextReader.Models
         private TextRecord currentRecord;
 
         public event EventHandler PlayStarted;
+        public event EventHandler PlayStopped;
 
         public ITalker Talker
         {
@@ -64,6 +65,7 @@ namespace TextReader.Models
             talker.Stop();
             talker.TalkStopped -= PlayNext;
             Index = 0;
+            PlayStopped?.Invoke(this, EventArgs.Empty);
         }
 
         public void Pause()
@@ -75,6 +77,7 @@ namespace TextReader.Models
         private void PlayNext(object sender, EventArgs e)
         {
             talker.TalkStopped -= PlayNext;
+            PlayStopped?.Invoke(this, EventArgs.Empty);
             Play();
         }
     }

@@ -21,6 +21,7 @@
 
         private int selectionTitleIndex;
         private int selectionTextIndex;
+        private bool playButtonEnabled = true;
 
         public MainWindowViewModel()
         {
@@ -31,7 +32,13 @@
 
             // player が読み上げを開始した際、テキストレコードの視聴回数のカウンターがインクリメントされる。
             // それをデータベースに反映させるため、イベントハンドラをセットする。
-            player.PlayStarted += (sender, e) => databaseContext.SaveChanges();
+            player.PlayStarted += (sender, e) =>
+            {
+                PlayButtonEnabled = false; ;
+                databaseContext.SaveChanges();
+            };
+
+            player.PlayStopped += (sender, e) => PlayButtonEnabled = true;
         }
 
         public string Title
@@ -55,6 +62,8 @@
         }
 
         public int SelectionTextIndex { get => selectionTextIndex; set => SetProperty(ref selectionTextIndex, value); }
+
+        public bool PlayButtonEnabled { get => playButtonEnabled; set => SetProperty(ref playButtonEnabled, value); }
 
         public DelegateCommand PlayCommand => new DelegateCommand(() =>
         {

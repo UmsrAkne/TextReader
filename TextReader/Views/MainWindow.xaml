@@ -70,6 +70,7 @@
                 <Button
                     Command="{Binding PlayCommand}"
                     Content="Play"
+                    IsEnabled="{Binding PlayButtonEnabled}"
                     Template="{StaticResource buttonTemplate}" />
 
                 <Button
