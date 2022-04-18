@@ -34,7 +34,7 @@
             // それをデータベースに反映させるため、イベントハンドラをセットする。
             player.PlayStarted += (sender, e) =>
             {
-                PlayButtonEnabled = false; ;
+                PlayButtonEnabled = false;
                 databaseContext.SaveChanges();
             };
 
