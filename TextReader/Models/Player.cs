@@ -59,6 +59,10 @@ namespace TextReader.Models
                 Index++;
                 talker.TalkStopped += PlayNext;
             }
+            else
+            {
+                Index = 0;
+            }
         }
 
         public void Stop()
