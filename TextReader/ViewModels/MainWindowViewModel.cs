@@ -21,7 +21,7 @@
 
         private int selectionTitleIndex;
         private int selectionTextIndex;
-        private bool playButtonEnabled = true;
+        private bool playing = false;
 
         public MainWindowViewModel()
         {
@@ -34,11 +34,11 @@
             // それをデータベースに反映させるため、イベントハンドラをセットする。
             player.PlayStarted += (sender, e) =>
             {
-                PlayButtonEnabled = false;
+                Playing = true;
                 databaseContext.SaveChanges();
             };
 
-            player.PlayStopped += (sender, e) => PlayButtonEnabled = true;
+            player.PlayStopped += (sender, e) => Playing = false;
         }
 
         public string Title
@@ -63,7 +63,7 @@
 
         public int SelectionTextIndex { get => selectionTextIndex; set => SetProperty(ref selectionTextIndex, value); }
 
-        public bool PlayButtonEnabled { get => playButtonEnabled; set => SetProperty(ref playButtonEnabled, value); }
+        public bool Playing { get => playing; set => SetProperty(ref playing, value); }
 
         public DelegateCommand PlayCommand => new DelegateCommand(() =>
         {
@@ -73,6 +73,7 @@
         public DelegateCommand StopCommand => new DelegateCommand(() =>
         {
             player.Stop();
+            SelectionTextIndex = player.Index;
         });
 
         public DelegateCommand SetStartIndexCommand => new DelegateCommand(() =>

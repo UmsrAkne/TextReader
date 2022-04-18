@@ -76,6 +76,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\BoolNegativeConverter.cs" />
     <Compile Include="Models\NumberFormatConverter.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Talkers\BouyomiTalker.cs" />
