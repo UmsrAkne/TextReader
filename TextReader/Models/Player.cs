@@ -63,6 +63,11 @@ namespace TextReader.Models
 
         public void Stop()
         {
+            if (currentRecord != null)
+            {
+                currentRecord.IsPlaying = false;
+            }
+
             talker.Stop();
             talker.TalkStopped -= PlayNext;
             Index = 0;

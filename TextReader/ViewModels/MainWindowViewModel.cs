@@ -73,6 +73,7 @@
         public DelegateCommand StopCommand => new DelegateCommand(() =>
         {
             player.Stop();
+            SelectionTextIndex = player.Index;
         });
 
         public DelegateCommand SetStartIndexCommand => new DelegateCommand(() =>

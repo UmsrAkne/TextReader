@@ -24,7 +24,7 @@
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            ExecuteRemoteTalk($"/Clear");
         }
 
         public void Talk(string str)
