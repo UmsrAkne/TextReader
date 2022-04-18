@@ -20,6 +20,7 @@ namespace TextReader.Models
         private TextRecord currentRecord;
 
         public event EventHandler PlayStarted;
+
         public event EventHandler PlayStopped;
 
         public ITalker Talker
