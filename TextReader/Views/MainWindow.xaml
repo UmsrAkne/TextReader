@@ -121,7 +121,7 @@
         <StatusBar
             Grid.Row="3"
             Grid.ColumnSpan="2"
-            Height="20"
+            Height="25"
             HorizontalAlignment="Right"
             Background="Transparent">
 
@@ -142,12 +142,12 @@
 
                 <Border
                     Width="1"
-                    Margin="4,0"
+                    Margin="10,0"
                     Background="Gray" />
 
                 <TextBlock Text="状態 : " />
 
-                <TextBlock>
+                <TextBlock Margin="0,0,5,0">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
