@@ -121,7 +121,37 @@
         <StatusBar
             Grid.Row="3"
             Grid.ColumnSpan="2"
-            Height="20" />
+            Height="20"
+            HorizontalAlignment="Right"
+            Background="Transparent">
+
+            <StackPanel Orientation="Horizontal">
+
+                <Border
+                    Width="1"
+                    Margin="4,0"
+                    Background="Gray" />
+
+                <TextBlock Text="状態 : " />
+
+                <TextBlock>
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Playing}" Value="True">
+                                    <Setter Property="Text" Value="再生中" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Playing}" Value="False">
+                                    <Setter Property="Text" Value="停止中" />
+                                </DataTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+        </StatusBar>
 
     </Grid>
 </Window>
