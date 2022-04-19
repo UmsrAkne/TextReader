@@ -87,6 +87,7 @@
         <ListView
             Grid.Row="2"
             Grid.Column="0"
+            IsEnabled="{Binding Playing, Converter={StaticResource BoolNegativeConverter}}"
             ItemTemplate="{StaticResource ResourceKey=TitleItemTemplate}"
             ItemsSource="{Binding Titles}"
             SelectedIndex="{Binding SelectionTitleIndex}" />
