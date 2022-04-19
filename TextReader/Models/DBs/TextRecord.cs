@@ -5,9 +5,10 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using Prism.Mvvm;
 
-    public class TextRecord : BindableBase 
+    public class TextRecord : BindableBase
     {
         private bool isPlaying;
+        private int listenCount;
 
         [Key]
         [Required]
@@ -26,7 +27,7 @@
         public int TitleNumber { get; set; }
 
         [Required]
-        public int ListenCount { get; set; }
+        public int ListenCount { get => listenCount; set => SetProperty(ref listenCount, value); }
 
         [Required]
         public DateTime CreationDateTime { get; set; }
