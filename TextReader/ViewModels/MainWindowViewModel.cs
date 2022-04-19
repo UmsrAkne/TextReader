@@ -22,6 +22,7 @@
         private int selectionTitleIndex;
         private int selectionTextIndex;
         private bool playing = false;
+        private int playingIndex;
 
         public MainWindowViewModel()
         {
@@ -35,10 +36,15 @@
             player.PlayStarted += (sender, e) =>
             {
                 Playing = true;
+                PlayingIndex = player.Index;
                 databaseContext.SaveChanges();
             };
 
-            player.PlayStopped += (sender, e) => Playing = false;
+            player.PlayStopped += (sender, e) =>
+            {
+                PlayingIndex = player.Index;
+                Playing = false;
+            };
         }
 
         public string Title
@@ -64,6 +70,8 @@
         public int SelectionTextIndex { get => selectionTextIndex; set => SetProperty(ref selectionTextIndex, value); }
 
         public bool Playing { get => playing; set => SetProperty(ref playing, value); }
+
+        public int PlayingIndex { get => playingIndex; set => SetProperty(ref playingIndex, value); }
 
         public DelegateCommand PlayCommand => new DelegateCommand(() =>
         {

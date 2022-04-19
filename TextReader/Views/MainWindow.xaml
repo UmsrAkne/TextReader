@@ -127,6 +127,19 @@
 
             <StackPanel Orientation="Horizontal">
 
+                <TextBlock VerticalAlignment="Center" Text="{Binding PlayingIndex}" />
+
+                <TextBlock Margin="5,0" Text="行" />
+
+                <TextBlock VerticalAlignment="Center" Text="/" />
+
+                <TextBlock
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Text="{Binding Texts.Count}" />
+
+                <TextBlock Text="行" />
+
                 <Border
                     Width="1"
                     Margin="4,0"
