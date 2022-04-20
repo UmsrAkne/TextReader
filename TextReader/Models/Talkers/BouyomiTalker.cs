@@ -16,7 +16,7 @@
         public BouyomiTalker()
         {
             timer.Tick += Timer_Tick;
-            waitTimer.Tick += Wait; 
+            waitTimer.Tick += Wait;
         }
 
         public event EventHandler TalkStopped;
@@ -46,7 +46,7 @@
         {
             playingCheckWaitCounter--;
 
-            if(playingCheckWaitCounter > 0)
+            if (playingCheckWaitCounter > 0)
             {
                 return;
             }
