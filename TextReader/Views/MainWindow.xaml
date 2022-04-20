@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="../Resource/TextItemTemplate.xaml" />
                 <ResourceDictionary Source="../Resource/TitleItemTemplate.xaml" />
                 <ResourceDictionary Source="../Resource/CustomButtonTemplate.xaml" />
+                <ResourceDictionary Source="../Resource/StatusBarContent.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <models:BoolNegativeConverter x:Key="BoolNegativeConverter" />
@@ -125,46 +126,8 @@
             Height="25"
             HorizontalAlignment="Right"
             Background="Transparent">
+            <StatusBarItem Content="{StaticResource StatusBarContent}" />
 
-            <StackPanel Orientation="Horizontal">
-
-                <TextBlock VerticalAlignment="Center" Text="{Binding PlayingIndex}" />
-
-                <TextBlock Margin="5,0" Text="行" />
-
-                <TextBlock VerticalAlignment="Center" Text="/" />
-
-                <TextBlock
-                    Margin="5,0"
-                    VerticalAlignment="Center"
-                    Text="{Binding Texts.Count}" />
-
-                <TextBlock Text="行" />
-
-                <Border
-                    Width="1"
-                    Margin="10,0"
-                    Background="Gray" />
-
-                <TextBlock Text="状態 : " />
-
-                <TextBlock Margin="0,0,5,0">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Playing}" Value="True">
-                                    <Setter Property="Text" Value="再生中" />
-                                </DataTrigger>
-
-                                <DataTrigger Binding="{Binding Playing}" Value="False">
-                                    <Setter Property="Text" Value="停止中" />
-                                </DataTrigger>
-
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-            </StackPanel>
         </StatusBar>
 
     </Grid>
