@@ -11,6 +11,7 @@
     {
         private DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
         private DispatcherTimer waitTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(3000) };
+        private int playingCheckWaitCounter;
 
         public BouyomiTalker()
         {
@@ -36,12 +37,20 @@
             else
             {
                 ExecuteRemoteTalk($"/Talk {str}");
+                playingCheckWaitCounter = (int)Math.Ceiling((decimal)str.Length / 30);
                 timer.Start();
             }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            playingCheckWaitCounter--;
+
+            if(playingCheckWaitCounter > 0)
+            {
+                return;
+            }
+
             var process = ExecuteRemoteTalk($"/GetNowPlaying");
             process.WaitForExit();
 
