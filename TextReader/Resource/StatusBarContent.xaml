@@ -24,10 +24,44 @@
 
         <Border
             Margin="0,0,5,0"
-            Padding="8,0,2,0"
-            BorderBrush="Gray"
+            Padding="7,0,2,0"
+            BorderBrush="LightGray"
             BorderThickness="1"
             CornerRadius="3">
+
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+
+                        <DataTrigger Binding="{Binding Playing}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+
+                                        <ColorAnimation
+                                            Storyboard.TargetProperty="BorderBrush.Color"
+                                            To="LimeGreen"
+                                            Duration="0:0:0.5" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+
+                                        <ColorAnimation
+                                            Storyboard.TargetProperty="BorderBrush.Color"
+                                            To="Gray"
+                                            Duration="0:0:0.5" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
 
             <TextBlock Margin="0,0,5,0" HorizontalAlignment="Center">
 
@@ -36,10 +70,12 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Playing}" Value="True">
                                 <Setter Property="Text" Value="再生中" />
+                                <Setter Property="Foreground" Value="Green" />
                             </DataTrigger>
 
                             <DataTrigger Binding="{Binding Playing}" Value="False">
                                 <Setter Property="Text" Value="停止中" />
+                                <Setter Property="Foreground" Value="Black" />
                             </DataTrigger>
 
                         </Style.Triggers>
