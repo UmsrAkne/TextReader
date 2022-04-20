@@ -64,6 +64,7 @@
             {
                 SetProperty(ref selectionTitleIndex, value);
                 Texts = new ObservableCollection<TextRecord>(databaseContext.GetTexts(Titles[SelectionTitleIndex].Id));
+                player.Texts = new List<TextRecord>(Texts);
             }
         }
 
