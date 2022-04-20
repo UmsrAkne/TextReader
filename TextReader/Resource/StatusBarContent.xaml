@@ -22,21 +22,30 @@
 
         <TextBlock Text="状態 : " />
 
-        <TextBlock Margin="0,0,5,0">
-            <TextBlock.Style>
-                <Style TargetType="TextBlock">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Playing}" Value="True">
-                            <Setter Property="Text" Value="再生中" />
-                        </DataTrigger>
+        <Border
+            Margin="0,0,5,0"
+            Padding="8,0,2,0"
+            BorderBrush="Gray"
+            BorderThickness="1"
+            CornerRadius="3">
 
-                        <DataTrigger Binding="{Binding Playing}" Value="False">
-                            <Setter Property="Text" Value="停止中" />
-                        </DataTrigger>
+            <TextBlock Margin="0,0,5,0" HorizontalAlignment="Center">
 
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Playing}" Value="True">
+                                <Setter Property="Text" Value="再生中" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Playing}" Value="False">
+                                <Setter Property="Text" Value="停止中" />
+                            </DataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Border>
     </StackPanel>
 </ResourceDictionary>
