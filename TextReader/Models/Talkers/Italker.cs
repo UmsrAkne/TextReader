@@ -10,6 +10,8 @@
 
         int TalkSpeed { get; set; }
 
+        int Volume { get; set; }
+
         void Talk(string message);
 
         void Stop();

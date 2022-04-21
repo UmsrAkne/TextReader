@@ -25,6 +25,8 @@
 
         public int TalkSpeed { get; set; }
 
+        public int Volume { get; set; }
+
         public void Stop()
         {
             ExecuteRemoteTalk($"/Clear");
