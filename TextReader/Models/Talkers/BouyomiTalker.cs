@@ -23,6 +23,8 @@
 
         public bool CanPlay => Process.GetProcessesByName("BouyomiChan").Length > 0;
 
+        public int TalkSpeed { get; set; }
+
         public void Stop()
         {
             ExecuteRemoteTalk($"/Clear");

@@ -8,6 +8,8 @@
 
         bool CanPlay { get; }
 
+        int TalkSpeed { get; set; }
+
         void Talk(string message);
 
         void Stop();
