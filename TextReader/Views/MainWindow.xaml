@@ -104,7 +104,10 @@
             <Slider
                 Grid.Row="0"
                 Grid.Column="1"
-                VerticalAlignment="Center" />
+                Margin="5,0"
+                VerticalAlignment="Center"
+                Maximum="100"
+                Value="{Binding Volume}" />
 
             <TextBlock
                 Grid.Row="1"
@@ -116,6 +119,7 @@
             <Slider
                 Grid.Row="1"
                 Grid.Column="1"
+                Margin="5,0"
                 VerticalAlignment="Center" />
 
         </Grid>

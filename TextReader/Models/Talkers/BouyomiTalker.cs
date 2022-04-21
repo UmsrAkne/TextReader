@@ -25,7 +25,7 @@
 
         public int TalkSpeed { get; set; }
 
-        public int Volume { get; set; }
+        public int Volume { get; set; } = 100;
 
         public void Stop()
         {
@@ -40,7 +40,8 @@
             }
             else
             {
-                ExecuteRemoteTalk($"/Talk {str}");
+                /// Talk の引数は 入力文章 速度 音程 音量 話者ID の順となっている。
+                ExecuteRemoteTalk($"/Talk {str} {TalkSpeed} -1 {Volume} 0");
                 playingCheckWaitCounter = (int)Math.Ceiling((decimal)str.Length / 30);
                 timer.Start();
             }

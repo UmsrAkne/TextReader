@@ -74,6 +74,8 @@
 
         public int PlayingIndex { get => playingIndex; set => SetProperty(ref playingIndex, value); }
 
+        public int Volume { get => player.Talker.Volume; set => player.Talker.Volume = value; }
+
         public DelegateCommand PlayCommand => new DelegateCommand(() =>
         {
             player.Play();
