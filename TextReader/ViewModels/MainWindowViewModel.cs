@@ -15,7 +15,7 @@
         private readonly TextDBContext databaseContext = new TextDBContext(TextDBContext.CreateDbContextOptions());
         private readonly Player player = new Player();
 
-        private string title = "Prism Application";
+        private string title = "Text reader";
         private List<TitleRecord> titles = new List<TitleRecord>();
         private ObservableCollection<TextRecord> texts = new ObservableCollection<TextRecord>();
 
