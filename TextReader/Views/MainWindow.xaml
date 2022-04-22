@@ -106,6 +106,7 @@
                 Grid.Column="1"
                 Margin="5,0"
                 VerticalAlignment="Center"
+                AutoToolTipPlacement="BottomRight"
                 Maximum="100"
                 Value="{Binding Volume}" />
 
@@ -120,7 +121,11 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Margin="5,0"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center"
+                AutoToolTipPlacement="BottomRight"
+                Maximum="{Binding MaxTalkSpeed}"
+                Minimum="{Binding MinTalkSpeed}"
+                Value="{Binding TalkSpeed}" />
 
         </Grid>
 

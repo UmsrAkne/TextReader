@@ -17,6 +17,7 @@
         {
             timer.Tick += Timer_Tick;
             waitTimer.Tick += Wait;
+            TalkSpeed = DefaultTalkSpeed;
         }
 
         public event EventHandler TalkStopped;
@@ -26,6 +27,12 @@
         public int TalkSpeed { get; set; }
 
         public int Volume { get; set; } = 100;
+
+        public int MaxTalkSpeed => 300;
+
+        public int MinTalkSpeed => 50;
+
+        public int DefaultTalkSpeed => 100;
 
         public void Stop()
         {

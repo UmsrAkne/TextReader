@@ -17,6 +17,10 @@
 
         public int Volume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+        public int MaxTalkSpeed => throw new NotImplementedException();
+
+        public int MinTalkSpeed => throw new NotImplementedException();
+
         public void Stop()
         {
             Talking = false;
