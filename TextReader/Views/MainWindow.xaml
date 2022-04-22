@@ -94,35 +94,38 @@
                 <RowDefinition Height="25" />
             </Grid.RowDefinitions>
 
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Padding" Value="10,0" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+
+                <Style TargetType="Slider">
+                    <Setter Property="Margin" Value="5,0" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="AutoToolTipPlacement" Value="BottomRight" />
+                </Style>
+            </Grid.Resources>
+
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="0"
-                Padding="10,0"
-                VerticalAlignment="Center"
                 Text="音量" />
 
             <Slider
                 Grid.Row="0"
                 Grid.Column="1"
-                Margin="5,0"
-                VerticalAlignment="Center"
-                AutoToolTipPlacement="BottomRight"
                 Maximum="100"
                 Value="{Binding Volume}" />
 
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="0"
-                Padding="10,0"
-                VerticalAlignment="Center"
                 Text="読み上げ速度" />
 
             <Slider
                 Grid.Row="1"
                 Grid.Column="1"
-                Margin="5,0"
-                VerticalAlignment="Center"
-                AutoToolTipPlacement="BottomRight"
                 Maximum="{Binding MaxTalkSpeed}"
                 Minimum="{Binding MinTalkSpeed}"
                 Value="{Binding TalkSpeed}" />
