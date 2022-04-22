@@ -2,16 +2,13 @@
 
     <StackPanel x:Key="StatusBarContent" Orientation="Horizontal">
 
-        <TextBlock VerticalAlignment="Center" Text="{Binding PlayingIndex}" />
+        <TextBlock Text="{Binding PlayingIndex}" />
 
         <TextBlock Margin="5,0" Text="行" />
 
-        <TextBlock VerticalAlignment="Center" Text="/" />
+        <TextBlock Text="/" />
 
-        <TextBlock
-            Margin="5,0"
-            VerticalAlignment="Center"
-            Text="{Binding Texts.Count}" />
+        <TextBlock Margin="5,0" Text="{Binding Texts.Count}" />
 
         <TextBlock Text="行" />
 
