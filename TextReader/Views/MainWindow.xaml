@@ -63,6 +63,7 @@
                     <Style TargetType="Button">
                         <Setter Property="Padding" Value="15,1" />
                         <Setter Property="Margin" Value="5,0" />
+                        <Setter Property="Height" Value="30" />
                         <Setter Property="Background" Value="WhiteSmoke" />
                     </Style>
                 </StackPanel.Resources>
