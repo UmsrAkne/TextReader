@@ -1,6 +1,7 @@
 ﻿namespace TextReader.Models.Talkers
 {
     using System;
+    using TextReader.Models.DBs;
 
     public interface ITalker
     {
@@ -16,7 +17,7 @@
 
         int Volume { get; set; }
 
-        void Talk(string message);
+        void Talk(TextRecord textRecord);
 
         void Stop();
     }

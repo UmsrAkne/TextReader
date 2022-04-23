@@ -1,6 +1,7 @@
 ﻿namespace TextReaderTests.Models.Talkers
 {
     using System;
+    using TextReader.Models.DBs;
     using TextReader.Models.Talkers;
 
     public class DummyTalker : ITalker
@@ -26,9 +27,9 @@
             Talking = false;
         }
 
-        public void Talk(string message)
+        public void Talk(TextRecord textRecord)
         {
-            LastReadMessage = message;
+            LastReadMessage = textRecord.Text;
             Talking = true;
         }
 

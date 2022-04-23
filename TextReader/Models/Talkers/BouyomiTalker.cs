@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading;
     using System.Windows.Threading;
+    using TextReader.Models.DBs;
 
     public class BouyomiTalker : ITalker
     {
@@ -39,17 +40,17 @@
             ExecuteRemoteTalk($"/Clear");
         }
 
-        public void Talk(string str)
+        public void Talk(TextRecord record)
         {
-            if (string.IsNullOrWhiteSpace(str))
+            if (string.IsNullOrWhiteSpace(record.Text))
             {
                 waitTimer.Start();
             }
             else
             {
                 /// Talk の引数は 入力文章 速度 音程 音量 話者ID の順となっている。
-                ExecuteRemoteTalk($"/Talk {str} {TalkSpeed} -1 {Volume} 0");
-                playingCheckWaitCounter = (int)Math.Ceiling((decimal)str.Length / 30);
+                ExecuteRemoteTalk($"/Talk {record} {TalkSpeed} -1 {Volume} 0");
+                playingCheckWaitCounter = (int)Math.Ceiling((decimal)record.Text.Length / 30);
                 timer.Start();
             }
         }
