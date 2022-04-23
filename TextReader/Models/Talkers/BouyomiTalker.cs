@@ -42,15 +42,19 @@
 
         public void Talk(TextRecord record)
         {
-            if (string.IsNullOrWhiteSpace(record.Text))
+            /// 他の実装クラスの Talk() との兼ね合いで TextRecord を引数に取っているが、
+            /// このクラスで必要なのはテキストのみなので、テキストだけ取り出して利用する。
+            var message = record.Text;
+
+            if (string.IsNullOrWhiteSpace(message))
             {
                 waitTimer.Start();
             }
             else
             {
                 /// Talk の引数は 入力文章 速度 音程 音量 話者ID の順となっている。
-                ExecuteRemoteTalk($"/Talk {record} {TalkSpeed} -1 {Volume} 0");
-                playingCheckWaitCounter = (int)Math.Ceiling((decimal)record.Text.Length / 30);
+                ExecuteRemoteTalk($"/Talk {message} {TalkSpeed} -1 {Volume} 0");
+                playingCheckWaitCounter = (int)Math.Ceiling((decimal)message.Length / 30);
                 timer.Start();
             }
         }
