@@ -32,6 +32,9 @@
         [Required]
         public DateTime CreationDateTime { get; set; }
 
+        [Required]
+        public string OutputFileName { get; set; } = string.Empty;
+
         [NotMapped]
         public bool IsPlaying { get => isPlaying; set => SetProperty(ref isPlaying, value); }
     }
