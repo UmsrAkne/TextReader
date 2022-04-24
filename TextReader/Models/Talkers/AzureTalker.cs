@@ -5,13 +5,13 @@
     using System.Threading.Tasks;
     using Microsoft.CognitiveServices.Speech;
     using Microsoft.CognitiveServices.Speech.Audio;
+    using NAudio.Wave;
     using TextReader.Models.DBs;
-    using TextReader.Models.Talkers;
-    // using WMPLib;
 
     public class AzureTalker : ITalker
     {
         private DirectoryInfo outputDirectoryInfo = new DirectoryInfo("Output");
+        private WaveOut waveOut;
 
         public AzureTalker()
         {
@@ -19,17 +19,7 @@
             {
                 outputDirectoryInfo.Create();
             }
-
-            //WMP.PlayStateChange += (int NewState) =>
-            //{
-            //    if (WMP.playState == WMPPlayState.wmppsMediaEnded)
-            //    {
-            //        TalkEnded?.Invoke(this, new EventArgs());
-            //    }
-            //};
         }
-
-        public event EventHandler TalkEnded;
 
         public event EventHandler TalkStopped;
 
@@ -39,17 +29,23 @@
 
         public int TalkSpeed { get; set; }
 
-        public int MaxTalkSpeed => 100;
+        public int MaxTalkSpeed => 0;
 
         public int MinTalkSpeed => 0;
 
-        public int Volume { get; set; }
-
-        // private WindowsMediaPlayer WMP { get; } = new WindowsMediaPlayer();
+        public int Volume { get; set; } = 100;
 
         public void Stop()
         {
-            // WMP.controls.stop();
+            if (waveOut != null)
+            {
+                waveOut.Stop();
+            }
+        }
+
+        public async void Talk(TextRecord textRecord)
+        {
+            await Talk(textRecord.Text);
         }
 
         private async Task Talk(string ssml)
@@ -65,17 +61,20 @@
 
             using (var synthesizer = new SpeechSynthesizer(config, audioConfig))
             {
-                // await synthesizer.SpeakSsmlAsync(ssml);
                 await synthesizer.SpeakTextAsync(ssml);
             }
 
-            // WMP.URL = $"{outputDirectoryInfo.Name}\\{OutputFileName}";
-            // WMP.controls.play();
+            waveOut = new WaveOut();
+            waveOut.Init(new AudioFileReader($"{outputDirectoryInfo.Name}\\{OutputFileName}"));
+            waveOut.Play();
+
+            waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
         }
 
-        public async void Talk(TextRecord textRecord)
+        private void WaveOut_PlaybackStopped(object sender, StoppedEventArgs e)
         {
-            await Talk(textRecord.Text);
+            waveOut.PlaybackStopped -= WaveOut_PlaybackStopped;
+            TalkStopped?.Invoke(this, EventArgs.Empty);
         }
     }
 }
