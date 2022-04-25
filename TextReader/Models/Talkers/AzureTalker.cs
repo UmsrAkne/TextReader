@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using System.Threading.Tasks;
+    using System.Windows.Threading;
     using Microsoft.CognitiveServices.Speech;
     using Microsoft.CognitiveServices.Speech.Audio;
     using NAudio.Wave;
@@ -10,6 +11,7 @@
 
     public class AzureTalker : ITalker
     {
+        private readonly DispatcherTimer waitTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 3) };
         private DirectoryInfo outputDirectoryInfo = new DirectoryInfo("Output");
         private WaveOut waveOut;
 
@@ -19,6 +21,12 @@
             {
                 outputDirectoryInfo.Create();
             }
+
+            waitTimer.Tick += (sender, e) =>
+            {
+                waitTimer.Stop();
+                TalkStopped?.Invoke(this, EventArgs.Empty);
+            };
         }
 
         public event EventHandler TalkStopped;
@@ -47,10 +55,27 @@
 
         public async void Talk(TextRecord textRecord)
         {
-            await Talk(textRecord.Text);
+            if (string.IsNullOrEmpty(textRecord.Text))
+            {
+                waitTimer.Start();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(textRecord.OutputFileName))
+            {
+                await StartTalk(textRecord);
+            }
+            else
+            {
+                waveOut = new WaveOut();
+                waveOut.Init(new AudioFileReader($"{outputDirectoryInfo.Name}\\{textRecord.OutputFileName}"));
+                waveOut.Play();
+
+                waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
+            }
         }
 
-        private async Task Talk(string ssml)
+        private async Task StartTalk(TextRecord record)
         {
             string key = Environment.GetEnvironmentVariable("Microsoft_Speech_Secret_key");
 
@@ -59,11 +84,12 @@
             config.SpeechSynthesisVoiceName = "ja-JP-KeitaNeural";
 
             OutputFileName = $"{DateTime.Now.ToString("yyyyMMddHHmmssff")}.wav";
+            record.OutputFileName = OutputFileName;
             var audioConfig = AudioConfig.FromWavFileOutput($"{outputDirectoryInfo.Name}\\{OutputFileName}");
 
             using (var synthesizer = new SpeechSynthesizer(config, audioConfig))
             {
-                await synthesizer.SpeakTextAsync(ssml);
+                await synthesizer.SpeakTextAsync(record.Text);
             }
 
             waveOut = new WaveOut();
