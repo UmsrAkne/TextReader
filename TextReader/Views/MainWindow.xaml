@@ -5,6 +5,7 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:models="clr-namespace:TextReader.Models"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:talkers="clr-namespace:TextReader.Models.Talkers"
     Title="{Binding Title}"
     Width="800"
     Height="600"
@@ -52,6 +53,24 @@
 
             <MenuItem Header="Tool">
                 <MenuItem Command="{Binding RunBouyomiChanCommand}" Header="棒読みちゃんを起動する" />
+            </MenuItem>
+
+            <MenuItem Header="Setting">
+                <MenuItem Header="読み手を切り替える">
+
+                    <MenuItem Command="{Binding ChangeTalkerCommand}" Header="棒読みちゃん">
+                        <MenuItem.CommandParameter>
+                            <talkers:BouyomiTalker />
+                        </MenuItem.CommandParameter>
+                    </MenuItem>
+
+                    <MenuItem Command="{Binding ChangeTalkerCommand}" Header="Azure Text To Speech">
+                        <MenuItem.CommandParameter>
+                            <talkers:AzureTalker />
+                        </MenuItem.CommandParameter>
+                    </MenuItem>
+
+                </MenuItem>
             </MenuItem>
         </Menu>
 

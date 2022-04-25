@@ -101,6 +101,16 @@
 
         public DelegateCommand RunBouyomiChanCommand => new DelegateCommand(() => Process.Start(@"BouyomiChan\BouyomiChan.exe"));
 
+        public DelegateCommand<ITalker> ChangeTalkerCommand => new DelegateCommand<ITalker>((talker) =>
+        {
+            /// CommandParameter として、MainWindow.xaml の方で生成した ITalker のインスタンスが入力される。
+            player.Talker = talker;
+            RaisePropertyChanged(nameof(Volume));
+            RaisePropertyChanged(nameof(TalkSpeed));
+            RaisePropertyChanged(nameof(MaxTalkSpeed));
+            RaisePropertyChanged(nameof(MinTalkSpeed));
+        });
+
         /// <summary>
         /// 入力されたテキストをタイトルと共にデータベースに書き込みます。
         /// </summary>
