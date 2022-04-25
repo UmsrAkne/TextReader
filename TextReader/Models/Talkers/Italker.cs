@@ -17,6 +17,8 @@
 
         int Volume { get; set; }
 
+        string TalkerName { get; }
+
         void Talk(TextRecord textRecord);
 
         void Stop();

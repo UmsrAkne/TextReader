@@ -17,6 +17,15 @@
             Margin="10,0"
             Background="Gray" />
 
+        <TextBlock Text="読み手 : " />
+
+        <TextBlock Text="{Binding Talker.TalkerName}" />
+
+        <Border
+            Width="1"
+            Margin="10,0"
+            Background="Gray" />
+
         <TextBlock Text="状態 : " />
 
         <Border
