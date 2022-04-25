@@ -136,7 +136,7 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Maximum="100"
-                Value="{Binding Volume}" />
+                Value="{Binding Talker.Volume}" />
 
             <TextBlock
                 Grid.Row="1"
@@ -146,9 +146,9 @@
             <Slider
                 Grid.Row="1"
                 Grid.Column="1"
-                Maximum="{Binding MaxTalkSpeed}"
-                Minimum="{Binding MinTalkSpeed}"
-                Value="{Binding TalkSpeed}" />
+                Maximum="{Binding Talker.MaxTalkSpeed}"
+                Minimum="{Binding Talker.MinTalkSpeed}"
+                Value="{Binding Talker.TalkSpeed}" />
 
         </Grid>
 

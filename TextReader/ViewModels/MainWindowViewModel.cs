@@ -23,12 +23,13 @@
         private int selectionTextIndex;
         private bool playing = false;
         private int playingIndex;
+        private ITalker talker;
 
         public MainWindowViewModel()
         {
             databaseContext.Database.EnsureCreated();
             UpdateLists();
-            player.Talker = new BouyomiTalker();
+            ChangeTalkerCommand.Execute(new BouyomiTalker());
             player.Texts = new List<TextRecord>(Texts);
 
             // player が読み上げを開始した際、テキストレコードの視聴回数のカウンターがインクリメントされる。
@@ -70,17 +71,16 @@
 
         public int SelectionTextIndex { get => selectionTextIndex; set => SetProperty(ref selectionTextIndex, value); }
 
+        /// <summary>
+        /// Player の中にも talker プロパティがあり、通常はそちらを使う。
+        /// こっちの方のプロパティは、ビューに表示する情報を取り出すために使う。(インスタンスは上述のものと同一)
+        /// テストの関係で Player が BindableBase を継承できなかったため、２つに分かれている。
+        /// </summary>
+        public ITalker Talker { get => talker; set => SetProperty(ref talker, value); }
+
         public bool Playing { get => playing; set => SetProperty(ref playing, value); }
 
         public int PlayingIndex { get => playingIndex; set => SetProperty(ref playingIndex, value); }
-
-        public int Volume { get => player.Talker.Volume; set => player.Talker.Volume = value; }
-
-        public int TalkSpeed { get => player.Talker.TalkSpeed; set => player.Talker.TalkSpeed = value; }
-
-        public int MaxTalkSpeed { get => player.Talker.MaxTalkSpeed; }
-
-        public int MinTalkSpeed { get => player.Talker.MinTalkSpeed; }
 
         public DelegateCommand PlayCommand => new DelegateCommand(() =>
         {
@@ -101,14 +101,11 @@
 
         public DelegateCommand RunBouyomiChanCommand => new DelegateCommand(() => Process.Start(@"BouyomiChan\BouyomiChan.exe"));
 
-        public DelegateCommand<ITalker> ChangeTalkerCommand => new DelegateCommand<ITalker>((talker) =>
+        public DelegateCommand<ITalker> ChangeTalkerCommand => new DelegateCommand<ITalker>((paramTalker) =>
         {
             /// CommandParameter として、MainWindow.xaml の方で生成した ITalker のインスタンスが入力される。
-            player.Talker = talker;
-            RaisePropertyChanged(nameof(Volume));
-            RaisePropertyChanged(nameof(TalkSpeed));
-            RaisePropertyChanged(nameof(MaxTalkSpeed));
-            RaisePropertyChanged(nameof(MinTalkSpeed));
+            Talker = paramTalker;
+            player.Talker = Talker;
         });
 
         /// <summary>
