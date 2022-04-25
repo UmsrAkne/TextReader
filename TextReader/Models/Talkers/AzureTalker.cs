@@ -35,6 +35,8 @@
 
         public int Volume { get; set; } = 100;
 
+        public string TalkerName => "Azure Text to Speech";
+
         public void Stop()
         {
             if (waveOut != null)

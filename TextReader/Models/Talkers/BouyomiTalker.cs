@@ -35,6 +35,8 @@
 
         public int DefaultTalkSpeed => 100;
 
+        public string TalkerName => "棒読みちゃん";
+
         public void Stop()
         {
             ExecuteRemoteTalk($"/Clear");

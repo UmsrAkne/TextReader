@@ -22,6 +22,8 @@
 
         public int MinTalkSpeed => throw new NotImplementedException();
 
+        public string TalkerName => "dummyTalker";
+
         public void Stop()
         {
             Talking = false;
