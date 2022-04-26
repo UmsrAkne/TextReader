@@ -11,7 +11,7 @@
 
     public class AzureTalker : ITalker
     {
-        private readonly DispatcherTimer waitTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 3) };
+        private readonly DispatcherTimer waitTimer = new DispatcherTimer();
         private DirectoryInfo outputDirectoryInfo = new DirectoryInfo("Output");
         private WaveOut waveOut;
 
@@ -21,6 +21,8 @@
             {
                 outputDirectoryInfo.Create();
             }
+
+            waitTimer.Interval = BlankLineWaitTime;
 
             waitTimer.Tick += (sender, e) =>
             {
@@ -44,6 +46,8 @@
         public int Volume { get; set; } = 100;
 
         public string TalkerName => "Azure Text to Speech";
+
+        public TimeSpan BlankLineWaitTime => new TimeSpan(0, 0, 3);
 
         public void Stop()
         {
