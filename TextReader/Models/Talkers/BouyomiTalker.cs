@@ -11,12 +11,13 @@
     public class BouyomiTalker : ITalker
     {
         private DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
-        private DispatcherTimer waitTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(3000) };
+        private DispatcherTimer waitTimer = new DispatcherTimer();
         private int playingCheckWaitCounter;
 
         public BouyomiTalker()
         {
             timer.Tick += Timer_Tick;
+            waitTimer.Interval = BlankLineWaitTime;
             waitTimer.Tick += Wait;
             TalkSpeed = DefaultTalkSpeed;
         }
@@ -36,6 +37,8 @@
         public int DefaultTalkSpeed => 100;
 
         public string TalkerName => "棒読みちゃん";
+
+        public TimeSpan BlankLineWaitTime => new TimeSpan(0, 0, 3);
 
         public void Stop()
         {

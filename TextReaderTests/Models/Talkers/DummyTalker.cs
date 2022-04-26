@@ -24,6 +24,8 @@
 
         public string TalkerName => "dummyTalker";
 
+        public TimeSpan BlankLineWaitTime => throw new NotImplementedException();
+
         public void Stop()
         {
             Talking = false;
