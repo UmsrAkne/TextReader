@@ -58,13 +58,21 @@
             <MenuItem Header="Setting">
                 <MenuItem Header="読み手を切り替える">
 
-                    <MenuItem Command="{Binding ChangeTalkerCommand}" Header="棒読みちゃん">
+                    <MenuItem
+                        Command="{Binding ChangeTalkerCommand}"
+                        Header="棒読みちゃん"
+                        IsEnabled="{Binding Playing, Converter={StaticResource BoolNegativeConverter}}">
+
                         <MenuItem.CommandParameter>
                             <talkers:BouyomiTalker />
                         </MenuItem.CommandParameter>
                     </MenuItem>
 
-                    <MenuItem Command="{Binding ChangeTalkerCommand}" Header="Azure Text To Speech">
+                    <MenuItem
+                        Command="{Binding ChangeTalkerCommand}"
+                        Header="Azure Text To Speech"
+                        IsEnabled="{Binding Playing, Converter={StaticResource BoolNegativeConverter}}">
+
                         <MenuItem.CommandParameter>
                             <talkers:AzureTalker />
                         </MenuItem.CommandParameter>
