@@ -38,6 +38,14 @@
             {
                 Playing = true;
                 PlayingIndex = player.Index;
+
+                databaseContext.Add(new ListenLog()
+                {
+                    TextID = player.Texts[PlayingIndex].Id,
+                    TalkerID = player.Talker.TalkerID,
+                    DateTime = System.DateTime.Now
+                });
+
                 databaseContext.SaveChanges();
             };
 
