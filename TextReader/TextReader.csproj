@@ -84,6 +84,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\DBs\ListenLog.cs" />
     <Compile Include="Models\Talkers\AzureTalker.cs" />
     <Compile Include="Models\BoolNegativeConverter.cs" />
     <Compile Include="Models\NumberFormatConverter.cs" />

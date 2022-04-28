@@ -22,6 +22,8 @@
 
         private DbSet<TitleRecord> Titles { get; set; }
 
+        private DbSet<ListenLog> Histories { get; set; }
+
         public static DbContextOptions<TextDBContext> CreateDbContextOptions()
         {
             var optionsBuilder = new DbContextOptionsBuilder<TextDBContext>();
