@@ -26,6 +26,8 @@
 
         public TimeSpan BlankLineWaitTime => throw new NotImplementedException();
 
+        public int TalkerID => 10;
+
         public void Stop()
         {
             Talking = false;

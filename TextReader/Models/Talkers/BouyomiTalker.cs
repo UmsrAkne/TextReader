@@ -40,6 +40,8 @@
 
         public TimeSpan BlankLineWaitTime => new TimeSpan(0, 0, 3);
 
+        public int TalkerID => 1;
+
         public void Stop()
         {
             ExecuteRemoteTalk($"/Clear");

@@ -19,6 +19,8 @@
 
         string TalkerName { get; }
 
+        int TalkerID { get; }
+
         TimeSpan BlankLineWaitTime { get; }
 
         void Talk(TextRecord textRecord);

@@ -49,6 +49,8 @@
 
         public TimeSpan BlankLineWaitTime => new TimeSpan(0, 0, 3);
 
+        public int TalkerID => 2;
+
         public void Stop()
         {
             if (waveOut != null)
