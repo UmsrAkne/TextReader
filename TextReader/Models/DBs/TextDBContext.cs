@@ -18,6 +18,8 @@
         {
         }
 
+        public DbSet<ListenLog> Histories { get; set; }
+
         private DbSet<TextRecord> Texts { get; set; }
 
         private DbSet<TitleRecord> Titles { get; set; }
@@ -43,6 +45,8 @@
             .OrderBy(record => record.Index)
             .ToList();
         }
+
+        public TextRecord GetText(int textID) => Texts.Where(t => t.Id == textID).First();
 
         public void AddTexts(List<TextRecord> texts)
         {

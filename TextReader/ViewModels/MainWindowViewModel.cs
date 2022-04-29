@@ -23,6 +23,7 @@
         private int selectionTextIndex;
         private bool playing = false;
         private int playingIndex;
+        private int readCharacterCount;
         private ITalker talker;
 
         public MainWindowViewModel()
@@ -38,6 +39,16 @@
             {
                 Playing = true;
                 PlayingIndex = player.Index;
+
+                databaseContext.Add(new ListenLog()
+                {
+                    TextID = player.Texts[PlayingIndex].Id,
+                    TalkerID = player.Talker.TalkerID,
+                    DateTime = System.DateTime.Now
+                });
+
+                ReadCharacterCount += player.Texts[PlayingIndex].Text.Length;
+
                 databaseContext.SaveChanges();
             };
 
@@ -78,6 +89,8 @@
         /// </summary>
         public ITalker Talker { get => talker; set => SetProperty(ref talker, value); }
 
+        public int ReadCharacterCount { get => readCharacterCount; set => SetProperty(ref readCharacterCount, value); }
+
         public bool Playing { get => playing; set => SetProperty(ref playing, value); }
 
         public int PlayingIndex { get => playingIndex; set => SetProperty(ref playingIndex, value); }
@@ -106,6 +119,11 @@
             /// CommandParameter として、MainWindow.xaml の方で生成した ITalker のインスタンスが入力される。
             Talker = paramTalker;
             player.Talker = Talker;
+
+            ReadCharacterCount = databaseContext.Histories
+                .Where(l => l.TalkerID == Talker.TalkerID)
+                .Select(bl => databaseContext.GetText(bl.TextID).Text.Length).ToList()
+                .Sum();
         });
 
         /// <summary>
