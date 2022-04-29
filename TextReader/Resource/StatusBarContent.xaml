@@ -21,6 +21,12 @@
 
         <TextBlock Text="{Binding Talker.TalkerName}" />
 
+        <TextBlock Margin="5,0" Text="(合計読み上げ文字数 :" />
+
+        <TextBlock Text="{Binding ReadCharacterCount}" />
+
+        <TextBlock Text=")" />
+
         <Border
             Width="1"
             Margin="10,0"
