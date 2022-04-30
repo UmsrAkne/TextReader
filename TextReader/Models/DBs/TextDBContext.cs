@@ -20,6 +20,8 @@
 
         public DbSet<ListenLog> Histories { get; set; }
 
+        public DbSet<TalkerSetting> TalkerSettings { get; set; }
+
         private DbSet<TextRecord> Texts { get; set; }
 
         private DbSet<TitleRecord> Titles { get; set; }
