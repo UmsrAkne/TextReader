@@ -41,7 +41,11 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="Volume" />
-                    <Slider Grid.Column="1" />
+                    <Slider
+                        Grid.Column="1"
+                        Maximum="100"
+                        Minimum="0"
+                        Value="{Binding BouyomiTalker.Volume}" />
                 </Grid>
 
                 <Grid Margin="0,5">
@@ -50,12 +54,21 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="Speed" />
-                    <Slider Grid.Column="1" />
+
+                    <Slider
+                        Grid.Column="1"
+                        Maximum="{Binding BouyomiTalker.MaxTalkSpeed}"
+                        Minimum="{Binding BouyomiTalker.MinTalkSpeed}"
+                        Value="{Binding BouyomiTalker.TalkSpeed}" />
                 </Grid>
 
                 <StackPanel Height="20" Orientation="Horizontal">
                     <TextBlock Text="Blank Line Wait : " />
-                    <TextBox Width="100" Margin="5,0" />
+                    <TextBox
+                        Width="100"
+                        Margin="5,0"
+                        Text="{Binding BouyomiTalker.BlankLineWaitTime}" />
+
                     <TextBlock Text="ms" />
                 </StackPanel>
 
@@ -76,7 +89,7 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="Volume" />
-                    <Slider Grid.Column="1" />
+                    <Slider Grid.Column="1" Value="{Binding AzureTalker.Volume}" />
                 </Grid>
 
                 <Grid Margin="0,5">
@@ -90,7 +103,10 @@
 
                 <StackPanel Height="20" Orientation="Horizontal">
                     <TextBlock Text="Blank Line Wait : " />
-                    <TextBox Width="100" Margin="5,0" />
+                    <TextBox
+                        Width="100"
+                        Margin="5,0"
+                        Text="{Binding AzureTalker.BlankLineWaitTime}" />
                     <TextBlock Text="ms" />
                 </StackPanel>
 
