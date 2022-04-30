@@ -97,7 +97,11 @@
             </StackPanel>
         </Border>
 
-        <Button Grid.Row="4" Content="閉じる">
+        <Button
+            Grid.Row="4"
+            Command="{Binding CloseWindowCommand}"
+            Content="閉じる">
+
             <Button.Template>
 
                 <ControlTemplate TargetType="Button">
