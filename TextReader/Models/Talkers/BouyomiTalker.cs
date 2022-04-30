@@ -13,6 +13,7 @@
         private DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
         private DispatcherTimer waitTimer = new DispatcherTimer();
         private int playingCheckWaitCounter;
+        private TimeSpan blankLineWaitTime = new TimeSpan(0, 0, 3);
 
         public BouyomiTalker()
         {
@@ -38,7 +39,15 @@
 
         public string TalkerName => "棒読みちゃん";
 
-        public TimeSpan BlankLineWaitTime => new TimeSpan(0, 0, 3);
+        public TimeSpan BlankLineWaitTime
+        {
+            get => blankLineWaitTime;
+            set 
+            {
+                blankLineWaitTime = value;
+                waitTimer.Interval = blankLineWaitTime;
+            }
+        }
 
         public int TalkerID => 1;
 
