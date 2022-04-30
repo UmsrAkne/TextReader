@@ -9,19 +9,14 @@
 
         public string Title => "Setting";
 
-        public bool CanCloseDialog()
-        {
-            throw new NotImplementedException();
-        }
+        public bool CanCloseDialog() => true;
 
         public void OnDialogClosed()
         {
-            throw new NotImplementedException();
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            throw new NotImplementedException();
         }
     }
 }

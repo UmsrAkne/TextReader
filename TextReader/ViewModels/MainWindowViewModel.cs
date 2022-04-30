@@ -10,6 +10,7 @@
     using TextReader.Models;
     using TextReader.Models.DBs;
     using TextReader.Models.Talkers;
+    using TextReader.Views;
 
     public class MainWindowViewModel : BindableBase
     {
@@ -127,6 +128,11 @@
                 .Where(l => l.TalkerID == Talker.TalkerID)
                 .Select(bl => databaseContext.GetText(bl.TextID).Text.Length).ToList()
                 .Sum();
+        });
+
+        public DelegateCommand ShowSettingWindowCommand => new DelegateCommand(() =>
+        {
+            dialogService.ShowDialog(nameof(SettingWindow));
         });
 
         /// <summary>
