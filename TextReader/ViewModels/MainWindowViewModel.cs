@@ -6,6 +6,7 @@
     using System.Linq;
     using Prism.Commands;
     using Prism.Mvvm;
+    using Prism.Services.Dialogs;
     using TextReader.Models;
     using TextReader.Models.DBs;
     using TextReader.Models.Talkers;
@@ -25,9 +26,11 @@
         private int playingIndex;
         private int readCharacterCount;
         private ITalker talker;
+        private IDialogService dialogService;
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IDialogService dialogService)
         {
+            this.dialogService = dialogService;
             databaseContext.Database.EnsureCreated();
             UpdateLists();
             ChangeTalkerCommand.Execute(new BouyomiTalker());
