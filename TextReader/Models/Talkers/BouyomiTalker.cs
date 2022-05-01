@@ -61,6 +61,7 @@
                 {
                     TalkerID = this.TalkerID,
                     TalkSpeed = this.TalkSpeed,
+                    BlankLineWaitTime = this.BlankLineWaitTime.Milliseconds,
                     Volume = this.Volume,
                 };
             }
@@ -71,6 +72,8 @@
                 {
                     TalkSpeed = value.TalkSpeed;
                     Volume = value.Volume;
+                    BlankLineWaitTime = TimeSpan.FromMilliseconds(value.BlankLineWaitTime);
+                    BouyomiChanLocation = value.BouyomiChanDirectoryPath;
                 }
             }
         }

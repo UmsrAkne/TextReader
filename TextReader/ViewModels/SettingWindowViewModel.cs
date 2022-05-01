@@ -33,7 +33,7 @@
                 destSetting.TalkerID = talker.TalkerID;
                 destSetting.TalkSpeed = talker.TalkSpeed;
                 destSetting.Volume = talker.Volume;
-                destSetting.BlankLineWaitTime = talker.BlankLineWaitTime;
+                destSetting.BlankLineWaitTime = talker.BlankLineWaitTime.Milliseconds;
             }
 
             var bouyomiSetting = databaseContext.TalkerSettings.Where(bou => BouyomiTalker.TalkerID == bou.TalkerID).FirstOrDefault();
@@ -41,12 +41,11 @@
             if (bouyomiSetting != null)
             {
                 cloneSetting(BouyomiTalker, bouyomiSetting);
+                bouyomiSetting.BouyomiChanDirectoryPath = BouyomiTalker.BouyomiChanLocation;
             }
             else
             {
-                bouyomiSetting = new TalkerSetting();
-                cloneSetting(BouyomiTalker, bouyomiSetting);
-                databaseContext.TalkerSettings.Add(bouyomiSetting);
+                databaseContext.TalkerSettings.Add(BouyomiTalker.Setting);
             }
 
             var azureSetting = databaseContext.TalkerSettings.Where(az => AzureTalker.TalkerID == az.TalkerID).FirstOrDefault();
@@ -54,12 +53,11 @@
             if (azureSetting != null)
             {
                 cloneSetting(AzureTalker, azureSetting);
+                azureSetting.AzureTTSKeyVariableName = AzureTalker.SecretKeyVariableName; 
             }
             else
             {
-                azureSetting = new TalkerSetting();
-                cloneSetting(AzureTalker, azureSetting);
-                databaseContext.TalkerSettings.Add(azureSetting);
+                databaseContext.TalkerSettings.Add(AzureTalker.Setting);
             }
 
             databaseContext.SaveChanges();
@@ -68,6 +66,20 @@
         public void OnDialogOpened(IDialogParameters parameters)
         {
             databaseContext = parameters.GetValue<TextDBContext>(nameof(TextDBContext));
+
+            var bouyomiSetting = databaseContext.TalkerSettings.Where(bou => BouyomiTalker.TalkerID == bou.TalkerID).FirstOrDefault();
+
+            if (bouyomiSetting != null)
+            {
+                BouyomiTalker = new BouyomiTalker() { Setting = bouyomiSetting };
+            }
+
+            var azureSetting = databaseContext.TalkerSettings.Where(az => AzureTalker.TalkerID == az.TalkerID).FirstOrDefault();
+
+            if (azureSetting != null)
+            {
+                AzureTalker = new AzureTalker() { Setting = azureSetting };
+            }
         }
     }
 }

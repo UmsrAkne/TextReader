@@ -72,6 +72,10 @@
                     <TextBlock Text="ms" />
                 </StackPanel>
 
+                <TextBlock Margin="0,8,0,5" Text="棒読みちゃん ( RemoteTalk.exe ) のパス" />
+
+                <TextBox Text="{Binding BouyomiTalker.BouyomiChanLocation}" />
+
             </StackPanel>
         </Border>
 
@@ -109,6 +113,10 @@
                         Text="{Binding AzureTalker.BlankLineWaitTime}" />
                     <TextBlock Text="ms" />
                 </StackPanel>
+
+                <TextBlock Margin="0,8,0,5" Text="Azure TTS のシークレットキーの環境変数名" />
+
+                <TextBox Text="{Binding AzureTalker.SecretKeyVariableName}" />
 
             </StackPanel>
         </Border>

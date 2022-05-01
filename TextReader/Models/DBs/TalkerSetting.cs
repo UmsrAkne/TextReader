@@ -16,12 +16,12 @@
         public int Volume { get; set; }
 
         [Required]
-        public string AzureTTSKeyVariableName { get; set; } = string.Empty;
+        public string AzureTTSKeyVariableName { get; set; } = "Microsoft_Speech_Secret_key";
 
         [Required]
-        public string BouyomiChanDirectoryPath { get; set; } = string.Empty;
+        public string BouyomiChanDirectoryPath { get; set; } = @"BouyomiChan\RemoteTalk\RemoteTalk.exe";
 
         [Required]
-        public TimeSpan BlankLineWaitTime { get; set; }
+        public int BlankLineWaitTime { get; set; } = 3000;
     }
 }

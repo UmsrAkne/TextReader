@@ -56,6 +56,8 @@
                 {
                     TalkerID = this.TalkerID,
                     TalkSpeed = this.TalkSpeed,
+                    BlankLineWaitTime = this.BlankLineWaitTime.Milliseconds,
+                    AzureTTSKeyVariableName = this.SecretKeyVariableName,
                     Volume = this.Volume,
                 };
             }
@@ -66,6 +68,8 @@
                 {
                     TalkSpeed = value.TalkSpeed;
                     Volume = value.Volume;
+                    BlankLineWaitTime = TimeSpan.FromMilliseconds(value.BlankLineWaitTime);
+                    SecretKeyVariableName = value.AzureTTSKeyVariableName;
                 }
             }
         }
