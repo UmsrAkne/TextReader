@@ -62,13 +62,11 @@
 
             set
             {
-                if (TalkerID != value.TalkerID)
+                if (TalkerID == value.TalkerID)
                 {
-                    return;
+                    TalkSpeed = value.TalkSpeed;
+                    Volume = value.Volume;
                 }
-
-                TalkSpeed = value.TalkSpeed;
-                Volume = value.Volume;
             }
         }
 
