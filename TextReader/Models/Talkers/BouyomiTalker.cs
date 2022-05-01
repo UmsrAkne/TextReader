@@ -42,7 +42,7 @@
         public TimeSpan BlankLineWaitTime
         {
             get => blankLineWaitTime;
-            set 
+            set
             {
                 blankLineWaitTime = value;
                 waitTimer.Interval = blankLineWaitTime;
@@ -50,6 +50,30 @@
         }
 
         public int TalkerID => 1;
+
+        public TalkerSetting Setting
+        {
+            get
+            {
+                return new TalkerSetting()
+                {
+                    TalkerID = this.TalkerID,
+                    TalkSpeed = this.TalkSpeed,
+                    Volume = this.Volume,
+                };
+            }
+
+            set
+            {
+                if (TalkerID != value.TalkerID)
+                {
+                    return;
+                }
+
+                TalkSpeed = value.TalkSpeed;
+                Volume = value.Volume;
+            }
+        }
 
         public void Stop()
         {
