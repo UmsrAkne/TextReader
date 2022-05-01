@@ -1,5 +1,6 @@
 ﻿namespace TextReader.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
@@ -132,7 +133,9 @@
 
         public DelegateCommand ShowSettingWindowCommand => new DelegateCommand(() =>
         {
-            dialogService.ShowDialog(nameof(SettingWindow));
+            var param = new DialogParameters();
+            param.Add(nameof(TextDBContext), databaseContext);
+            dialogService.ShowDialog(nameof(SettingWindow), param, new Action<IDialogResult>(r => { }));
         });
 
         /// <summary>

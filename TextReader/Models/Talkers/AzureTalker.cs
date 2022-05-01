@@ -72,6 +72,8 @@
             }
         }
 
+        public string SecretKeyVariableName { get; set; } = "Microsoft_Speech_Secret_key";
+
         public TimeSpan BlankLineWaitTime
         {
             get => blankLineWaitTime;
@@ -116,7 +118,7 @@
 
         private async Task StartTalk(TextRecord record)
         {
-            string key = Environment.GetEnvironmentVariable("Microsoft_Speech_Secret_key");
+            string key = Environment.GetEnvironmentVariable(SecretKeyVariableName);
 
             var config = SpeechConfig.FromSubscription(key, "japaneast");
             config.SpeechSynthesisLanguage = "ja-JP";

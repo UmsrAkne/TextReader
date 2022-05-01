@@ -39,6 +39,8 @@
 
         public string TalkerName => "棒読みちゃん";
 
+        public string BouyomiChanLocation { get; set; } = @"BouyomiChan\RemoteTalk\RemoteTalk.exe";
+
         public TimeSpan BlankLineWaitTime
         {
             get => blankLineWaitTime;
@@ -129,7 +131,7 @@
         private Process ExecuteRemoteTalk(string argument)
         {
             var process = new Process();
-            process.StartInfo.FileName = @"BouyomiChan\RemoteTalk\RemoteTalk.exe";
+            process.StartInfo.FileName = BouyomiChanLocation;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;

@@ -16,10 +16,10 @@
         public int Volume { get; set; }
 
         [Required]
-        public string AzureTTSKeyVariableName { get; set; }
+        public string AzureTTSKeyVariableName { get; set; } = string.Empty;
 
         [Required]
-        public string BouyomiChanDirectoryPath { get; set; }
+        public string BouyomiChanDirectoryPath { get; set; } = string.Empty;
 
         [Required]
         public TimeSpan BlankLineWaitTime { get; set; }
