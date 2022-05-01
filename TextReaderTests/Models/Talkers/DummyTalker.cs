@@ -28,6 +28,8 @@
 
         public int TalkerID => 10;
 
+        public TalkerSetting Setting { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public void Stop()
         {
             Talking = false;

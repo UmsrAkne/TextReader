@@ -2,6 +2,7 @@
 {
     using System.Windows;
     using Prism.Ioc;
+    using TextReader.ViewModels;
     using TextReader.Views;
 
     /// <summary>
@@ -16,6 +17,7 @@
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterDialog<SettingWindow, SettingWindowViewModel>();
         }
     }
 }

@@ -1,14 +1,17 @@
 ﻿namespace TextReader.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
     using Prism.Commands;
     using Prism.Mvvm;
+    using Prism.Services.Dialogs;
     using TextReader.Models;
     using TextReader.Models.DBs;
     using TextReader.Models.Talkers;
+    using TextReader.Views;
 
     public class MainWindowViewModel : BindableBase
     {
@@ -25,9 +28,11 @@
         private int playingIndex;
         private int readCharacterCount;
         private ITalker talker;
+        private IDialogService dialogService;
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IDialogService dialogService)
         {
+            this.dialogService = dialogService;
             databaseContext.Database.EnsureCreated();
             UpdateLists();
             ChangeTalkerCommand.Execute(new BouyomiTalker());
@@ -124,6 +129,13 @@
                 .Where(l => l.TalkerID == Talker.TalkerID)
                 .Select(bl => databaseContext.GetText(bl.TextID).Text.Length).ToList()
                 .Sum();
+        });
+
+        public DelegateCommand ShowSettingWindowCommand => new DelegateCommand(() =>
+        {
+            var param = new DialogParameters();
+            param.Add(nameof(TextDBContext), databaseContext);
+            dialogService.ShowDialog(nameof(SettingWindow), param, new Action<IDialogResult>(r => { }));
         });
 
         /// <summary>

@@ -23,6 +23,8 @@
 
         TimeSpan BlankLineWaitTime { get; }
 
+        TalkerSetting Setting { get; set; }
+
         void Talk(TextRecord textRecord);
 
         void Stop();

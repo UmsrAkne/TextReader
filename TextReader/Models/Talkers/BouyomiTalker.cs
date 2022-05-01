@@ -13,6 +13,7 @@
         private DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
         private DispatcherTimer waitTimer = new DispatcherTimer();
         private int playingCheckWaitCounter;
+        private TimeSpan blankLineWaitTime = new TimeSpan(0, 0, 3);
 
         public BouyomiTalker()
         {
@@ -38,9 +39,44 @@
 
         public string TalkerName => "棒読みちゃん";
 
-        public TimeSpan BlankLineWaitTime => new TimeSpan(0, 0, 3);
+        public string BouyomiChanLocation { get; set; } = @"BouyomiChan\RemoteTalk\RemoteTalk.exe";
+
+        public TimeSpan BlankLineWaitTime
+        {
+            get => blankLineWaitTime;
+            set
+            {
+                blankLineWaitTime = value;
+                waitTimer.Interval = blankLineWaitTime;
+            }
+        }
 
         public int TalkerID => 1;
+
+        public TalkerSetting Setting
+        {
+            get
+            {
+                return new TalkerSetting()
+                {
+                    TalkerID = this.TalkerID,
+                    TalkSpeed = this.TalkSpeed,
+                    BlankLineWaitTime = this.BlankLineWaitTime.Milliseconds,
+                    Volume = this.Volume,
+                };
+            }
+
+            set
+            {
+                if (TalkerID == value.TalkerID)
+                {
+                    TalkSpeed = value.TalkSpeed;
+                    Volume = value.Volume;
+                    BlankLineWaitTime = TimeSpan.FromMilliseconds(value.BlankLineWaitTime);
+                    BouyomiChanLocation = value.BouyomiChanDirectoryPath;
+                }
+            }
+        }
 
         public void Stop()
         {
@@ -96,7 +132,7 @@
         private Process ExecuteRemoteTalk(string argument)
         {
             var process = new Process();
-            process.StartInfo.FileName = @"BouyomiChan\RemoteTalk\RemoteTalk.exe";
+            process.StartInfo.FileName = BouyomiChanLocation;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;

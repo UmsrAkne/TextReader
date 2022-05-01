@@ -14,6 +14,7 @@
         private readonly DispatcherTimer waitTimer = new DispatcherTimer();
         private DirectoryInfo outputDirectoryInfo = new DirectoryInfo("Output");
         private WaveOut waveOut;
+        private TimeSpan blankLineWaitTime = new TimeSpan(0, 0, 3);
 
         public AzureTalker()
         {
@@ -47,7 +48,43 @@
 
         public string TalkerName => "Azure Text to Speech";
 
-        public TimeSpan BlankLineWaitTime => new TimeSpan(0, 0, 3);
+        public TalkerSetting Setting
+        {
+            get
+            {
+                return new TalkerSetting()
+                {
+                    TalkerID = this.TalkerID,
+                    TalkSpeed = this.TalkSpeed,
+                    BlankLineWaitTime = this.BlankLineWaitTime.Milliseconds,
+                    AzureTTSKeyVariableName = this.SecretKeyVariableName,
+                    Volume = this.Volume,
+                };
+            }
+
+            set
+            {
+                if (TalkerID == value.TalkerID)
+                {
+                    TalkSpeed = value.TalkSpeed;
+                    Volume = value.Volume;
+                    BlankLineWaitTime = TimeSpan.FromMilliseconds(value.BlankLineWaitTime);
+                    SecretKeyVariableName = value.AzureTTSKeyVariableName;
+                }
+            }
+        }
+
+        public string SecretKeyVariableName { get; set; } = "Microsoft_Speech_Secret_key";
+
+        public TimeSpan BlankLineWaitTime
+        {
+            get => blankLineWaitTime;
+            set
+            {
+                blankLineWaitTime = value;
+                waitTimer.Interval = blankLineWaitTime;
+            }
+        }
 
         public int TalkerID => 2;
 
@@ -83,7 +120,7 @@
 
         private async Task StartTalk(TextRecord record)
         {
-            string key = Environment.GetEnvironmentVariable("Microsoft_Speech_Secret_key");
+            string key = Environment.GetEnvironmentVariable(SecretKeyVariableName);
 
             var config = SpeechConfig.FromSubscription(key, "japaneast");
             config.SpeechSynthesisLanguage = "ja-JP";

@@ -79,6 +79,12 @@
                     </MenuItem>
 
                 </MenuItem>
+
+                <MenuItem
+                    Command="{Binding ShowSettingWindowCommand}"
+                    Header="設定"
+                    IsEnabled="{Binding Playing, Converter={StaticResource BoolNegativeConverter}}" />
+
             </MenuItem>
         </Menu>
 
