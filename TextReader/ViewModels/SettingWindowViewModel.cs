@@ -19,12 +19,12 @@
 
         public string Title => "Setting";
 
-        public bool CanCloseDialog() => true;
-
         public DelegateCommand CloseWindowCommand => new DelegateCommand(() =>
         {
             RequestClose?.Invoke(new DialogResult());
         });
+
+        public bool CanCloseDialog() => true;
 
         public void OnDialogClosed()
         {
