@@ -61,7 +61,7 @@
                 {
                     TalkerID = this.TalkerID,
                     TalkSpeed = this.TalkSpeed,
-                    BlankLineWaitTime = this.BlankLineWaitTime.Milliseconds,
+                    BlankLineWaitTime = (int)this.BlankLineWaitTime.TotalMilliseconds,
                     Volume = this.Volume,
                 };
             }

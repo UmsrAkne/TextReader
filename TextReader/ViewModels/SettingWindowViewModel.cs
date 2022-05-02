@@ -33,7 +33,7 @@
                 destSetting.TalkerID = talker.TalkerID;
                 destSetting.TalkSpeed = talker.TalkSpeed;
                 destSetting.Volume = talker.Volume;
-                destSetting.BlankLineWaitTime = talker.BlankLineWaitTime.Milliseconds;
+                destSetting.BlankLineWaitTime = (int)talker.BlankLineWaitTime.TotalMilliseconds;
             }
 
             var bouyomiSetting = databaseContext.TalkerSettings.Where(bou => BouyomiTalker.TalkerID == bou.TalkerID).FirstOrDefault();
