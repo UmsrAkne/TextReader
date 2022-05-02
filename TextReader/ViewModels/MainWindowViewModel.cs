@@ -168,6 +168,7 @@
             if (Titles.Count > 0)
             {
                 Texts = new ObservableCollection<TextRecord>(databaseContext.GetTexts(Titles.First().Id));
+                player.Texts = new List<TextRecord>(Texts);
             }
         }
     }
