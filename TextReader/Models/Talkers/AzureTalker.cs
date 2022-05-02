@@ -56,7 +56,7 @@
                 {
                     TalkerID = this.TalkerID,
                     TalkSpeed = this.TalkSpeed,
-                    BlankLineWaitTime = this.BlankLineWaitTime.Milliseconds,
+                    BlankLineWaitTime = (int)this.BlankLineWaitTime.TotalMilliseconds,
                     AzureTTSKeyVariableName = this.SecretKeyVariableName,
                     Volume = this.Volume,
                 };

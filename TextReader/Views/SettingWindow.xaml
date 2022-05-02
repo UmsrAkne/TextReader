@@ -5,8 +5,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TextReader.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:TextReader.Models"
     Title="SettingWindow"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <models:TimeSpanConverter x:Key="TimeSpanConverter" />
+        </ResourceDictionary>
+    </Page.Resources>
 
     <Grid Width="400" Height="auto">
         <Grid.RowDefinitions>
@@ -67,7 +74,7 @@
                     <TextBox
                         Width="100"
                         Margin="5,0"
-                        Text="{Binding BouyomiTalker.BlankLineWaitTime}" />
+                        Text="{Binding BouyomiTalker.BlankLineWaitTime, Converter={StaticResource TimeSpanConverter}}" />
 
                     <TextBlock Text="ms" />
                 </StackPanel>
@@ -110,7 +117,7 @@
                     <TextBox
                         Width="100"
                         Margin="5,0"
-                        Text="{Binding AzureTalker.BlankLineWaitTime}" />
+                        Text="{Binding AzureTalker.BlankLineWaitTime, Converter={StaticResource TimeSpanConverter}}" />
                     <TextBlock Text="ms" />
                 </StackPanel>
 
