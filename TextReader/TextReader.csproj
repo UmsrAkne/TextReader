@@ -97,8 +97,6 @@
     <Compile Include="Models\Talkers\BouyomiTalker.cs" />
     <Compile Include="Models\DBs\TitleRecord.cs" />
     <Compile Include="Models\DropBehavior.cs" />
-    <Compile Include="Models\IText.cs" />
-    <Compile Include="Models\PlainText.cs" />
     <Compile Include="Models\DBs\TextDBContext.cs" />
     <Compile Include="Models\DBs\TextRecord.cs" />
     <Compile Include="Models\Talkers\ITalker.cs" />
