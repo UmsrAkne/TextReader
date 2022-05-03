@@ -121,7 +121,17 @@
 
         public DelegateCommand<ITalker> ChangeTalkerCommand => new DelegateCommand<ITalker>((paramTalker) =>
         {
-            /// CommandParameter として、MainWindow.xaml の方で生成した ITalker のインスタンスが入力される。
+            /// 下記のような経路で引数が回ってくる
+            /// CommandParameter として、MainWindow.xaml の方で生成した ITalker のインスタンスが入力される
+            /// このクラスのコンストラクタで初期設定を行う際に ITalker が入力される。
+            /// 設定画面で行った設定を反映させるため、MainWindowViewModel が保持している現在選択中の ITalker が入力される
+
+            /// TalkerID を使ってデータベースから TalkerSetting を検索する
+            if (databaseContext.TalkerSettings.Any(ts => ts.TalkerID == paramTalker.TalkerID))
+            {
+                paramTalker.Setting = databaseContext.TalkerSettings.Where(ts => ts.TalkerID == paramTalker.TalkerID).First();
+            }
+
             Talker = paramTalker;
             player.Talker = Talker;
 
@@ -136,6 +146,7 @@
             var param = new DialogParameters();
             param.Add(nameof(TextDBContext), databaseContext);
             dialogService.ShowDialog(nameof(SettingWindow), param, new Action<IDialogResult>(r => { }));
+            ChangeTalkerCommand.Execute(Talker);
         });
 
         /// <summary>
