@@ -1,6 +1,5 @@
 ﻿namespace TextReader.Models.DBs
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
 
     public class TalkerSetting

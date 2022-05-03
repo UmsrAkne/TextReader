@@ -1,10 +1,7 @@
 ﻿namespace TextReader.Models.Talkers
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
-    using System.Threading;
     using System.Windows.Threading;
     using TextReader.Models.DBs;
 
