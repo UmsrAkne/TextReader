@@ -175,6 +175,7 @@
             SelectedIndex="{Binding SelectionTitleIndex}" />
 
         <ListView
+            Name="listView"
             Grid.Row="2"
             Grid.Column="1"
             HorizontalContentAlignment="Stretch"
@@ -198,6 +199,13 @@
                     </Style.Triggers>
                 </Style>
             </ListView.ItemContainerStyle>
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+
+                    <i:InvokeCommandAction Command="{Binding ScrollCommand}" CommandParameter="{Binding ElementName=listView}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
 
         </ListView>
 

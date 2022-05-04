@@ -5,6 +5,7 @@
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
+    using System.Windows.Controls;
     using Prism.Commands;
     using Prism.Mvvm;
     using Prism.Services.Dialogs;
@@ -44,6 +45,7 @@
             {
                 Playing = true;
                 PlayingIndex = player.Index;
+                SelectionTextIndex = PlayingIndex;
 
                 databaseContext.Add(new ListenLog()
                 {
@@ -108,13 +110,20 @@
         public DelegateCommand StopCommand => new DelegateCommand(() =>
         {
             player.Stop();
-            SelectionTextIndex = player.Index;
         });
 
         public DelegateCommand SetStartIndexCommand => new DelegateCommand(() =>
         {
             player.Index = SelectionTextIndex;
             player.Play();
+        });
+
+        public DelegateCommand<ListView> ScrollCommand => new DelegateCommand<ListView>((lv) =>
+        {
+            if (lv.Items.Count != 0 && SelectionTextIndex >= 0)
+            {
+                lv.ScrollIntoView(lv.Items.GetItemAt(SelectionTextIndex));
+            }
         });
 
         public DelegateCommand RunBouyomiChanCommand => new DelegateCommand(() => Process.Start(@"BouyomiChan\BouyomiChan.exe"));
