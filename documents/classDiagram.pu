@@ -1,0 +1,72 @@
+@startuml name
+
+    MainWindowViewModel *-- Player 
+    Player *-left- ITalker
+
+    ITalker <.down. AzureTalker
+    ITalker <.down. BouyomiTalker
+
+interface ITalker
+
+class MainWindowViewModel {
+    private Player player
+    string Title
+    ObservableCollection<TextRecord> Texts 
+    List<TitleRecord> Titles 
+    int SelectionTitleIndex
+    int SelectionTextIndex 
+    ITalker Talker 
+    int ReadCharacterCount 
+    bool Playing 
+    int PlayingIndex 
+
+    DelegateCommand PlayCommand 
+    DelegateCommand StopCommand 
+    DelegateCommand SetStartIndexCommand 
+    DelegateCommand<ListView> ScrollCommand 
+    DelegateCommand RunBouyomiChanCommand 
+    DelegateCommand<ITalker> ChangeTalkerCommand 
+    DelegateCommand ShowSettingWindowCommand 
+
+    void WriteTextFile(string fileName, List<string> content)
+}
+
+note right : "操作の起点となる MainWindow の ViewModel です。\nprivate で Player をフィールドに保持します。\nDelegateCommand を経由してビューから player の機能を使用します。 "
+
+class Player{
+    event EventHandler PlayStarted;
+    event EventHandler PlayStopped;
+    ITalker Talker
+    List<TextRecord> Texts
+    int Index
+    void Play()
+    void Stop()
+    void Pause()
+}
+
+note right : "内部に保持した ITalker の機能を使ってテキストを読み上げるクラスです。"
+
+interface ITalker{
+    event EventHandler TalkStopped;
+    bool CanPlay { get; }
+    int TalkSpeed { get; set; }
+    int MaxTalkSpeed { get; }
+    int MinTalkSpeed { get; }
+    int Volume { get; set; }
+    string TalkerName { get; }
+    int TalkerID { get; }
+    TimeSpan BlankLineWaitTime { get; }
+    TalkerSetting Setting { get; set; }
+    void Talk(TextRecord textRecord);
+    void Stop();
+}
+
+class AzureTalker{
+}
+note bottom of AzureTalker: "Azure Text to speech を使ってテキストを読み上げます。"
+
+class BouyomiTalker{
+}
+note bottom of BouyomiTalker : "棒読みちゃんを使ってテキストを読み上げます。"
+       
+@enduml
