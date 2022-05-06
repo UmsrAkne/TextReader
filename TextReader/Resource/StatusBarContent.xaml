@@ -12,6 +12,12 @@
 
         <TextBlock Text="行" />
 
+        <TextBlock Margin="4,0,0,0" Text="(" />
+
+        <TextBlock Margin="5,0" Text="{Binding ReadRatio}" />
+
+        <TextBlock Text="%)" />
+
         <Border
             Width="1"
             Margin="10,0"
