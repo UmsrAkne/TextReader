@@ -30,6 +30,7 @@
         private int readCharacterCount;
         private ITalker talker;
         private IDialogService dialogService;
+        private double readRatio = 0;
 
         public MainWindowViewModel(IDialogService dialogService)
         {
@@ -63,6 +64,7 @@
             {
                 PlayingIndex = player.Index;
                 Playing = false;
+                ReadRatio = PlayingIndex != 0 ? Math.Round(100.0 * PlayingIndex / player.Texts.Count, 3) : 0;
             };
         }
 
@@ -101,6 +103,8 @@
         public bool Playing { get => playing; set => SetProperty(ref playing, value); }
 
         public int PlayingIndex { get => playingIndex; set => SetProperty(ref playingIndex, value); }
+
+        public double ReadRatio { get => readRatio; set => SetProperty(ref readRatio, value); }
 
         public DelegateCommand PlayCommand => new DelegateCommand(() =>
         {
