@@ -154,6 +154,11 @@
                 .Sum();
         });
 
+        public DelegateCommand JumpToUnreadTextCommand => new DelegateCommand(() =>
+        {
+            SelectionTextIndex = Texts.Where(tr => tr.ListenCount > 0).Max(tr => tr.Index) + 1;
+        });
+
         public DelegateCommand ShowSettingWindowCommand => new DelegateCommand(() =>
         {
             var param = new DialogParameters();
