@@ -55,6 +55,10 @@
                 <MenuItem Command="{Binding RunBouyomiChanCommand}" Header="棒読みちゃんを起動する" />
             </MenuItem>
 
+            <MenuItem Header="Move">
+                <MenuItem Command="{Binding JumpToUnreadTextCommand}" Header="未読までスクロール" />
+            </MenuItem>
+
             <MenuItem Header="Setting">
                 <MenuItem Header="読み手を切り替える">
 
