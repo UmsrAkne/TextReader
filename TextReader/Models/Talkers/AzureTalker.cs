@@ -110,11 +110,7 @@
             }
             else
             {
-                waveOut = new WaveOut();
-                waveOut.Init(new AudioFileReader($"{outputDirectoryInfo.Name}\\{textRecord.OutputFileName}"));
-                waveOut.Play();
-
-                waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
+                PlayWaveOut($"{outputDirectoryInfo.Name}\\{textRecord.OutputFileName}");
             }
         }
 
@@ -135,8 +131,27 @@
                 await synthesizer.SpeakTextAsync(record.Text);
             }
 
+            PlayWaveOut($"{outputDirectoryInfo.Name}\\{OutputFileName}");
+        }
+
+        private void PlayWaveOut(string audioFilePath)
+        {
+            if (new FileInfo(audioFilePath).Length == 0)
+            {
+                /// 読み上げるテキストに不正な文字列が含まれている場合、
+                /// サイズ 0 の wav ファイルが生成される。
+                /// これを WaveOut() を使って再生すると例外がスローされる。
+                /// そのため、サイズが 0 だった場合は waitTimer を起動。
+
+                /// 尚、このブロックが実行される時点では、まだハンドラがセットされていないので、
+                /// 即終了イベントを飛ばしても、次の音声が再生されない。
+
+                waitTimer.Start();
+                return;
+            }
+
             waveOut = new WaveOut();
-            waveOut.Init(new AudioFileReader($"{outputDirectoryInfo.Name}\\{OutputFileName}"));
+            waveOut.Init(new AudioFileReader(audioFilePath));
             waveOut.Play();
 
             waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
