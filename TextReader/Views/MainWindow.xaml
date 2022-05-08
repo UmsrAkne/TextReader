@@ -216,10 +216,22 @@
         <StatusBar
             Grid.Row="3"
             Grid.ColumnSpan="2"
-            Height="25"
-            HorizontalAlignment="Right"
-            Background="Transparent">
-            <StatusBarItem Content="{StaticResource StatusBarContent}" />
+            Height="25">
+            <StatusBarItem HorizontalAlignment="Right" Content="{StaticResource StatusBarContent}" />
+
+            <StatusBar.Style>
+                <Style TargetType="StatusBar">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Talker.TalkerID}" Value="1">
+                            <Setter Property="Background" Value="MistyRose" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Talker.TalkerID}" Value="2">
+                            <Setter Property="Background" Value="LightCyan" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StatusBar.Style>
 
         </StatusBar>
 
