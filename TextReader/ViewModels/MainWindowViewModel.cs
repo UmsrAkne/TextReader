@@ -37,7 +37,18 @@
             this.dialogService = dialogService;
             databaseContext.Database.EnsureCreated();
             UpdateLists();
-            ChangeTalkerCommand.Execute(new BouyomiTalker());
+
+            // 最後に利用していた話者を特定する。
+            // 候補は数個しかないので、それぞれのインスタンスを生成して TalkeID を確認。
+            var allTalkerList = new List<ITalker>() { new BouyomiTalker(), new AzureTalker() };
+            var lastUseTalker = allTalkerList.FirstOrDefault(t => Properties.Settings.Default.LastUseTalkerID == t.TalkerID);
+
+            if (lastUseTalker == null)
+            {
+                lastUseTalker = new BouyomiTalker();
+            }
+
+            ChangeTalkerCommand.Execute(lastUseTalker);
             player.Texts = new List<TextRecord>(Texts);
 
             // player が読み上げを開始した際、テキストレコードの視聴回数のカウンターがインクリメントされる。
@@ -147,6 +158,9 @@
 
             Talker = paramTalker;
             player.Talker = Talker;
+
+            Properties.Settings.Default.LastUseTalkerID = Talker.TalkerID;
+            Properties.Settings.Default.Save();
 
             ReadCharacterCount = databaseContext.Histories
                 .Where(l => l.TalkerID == Talker.TalkerID)
