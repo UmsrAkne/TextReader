@@ -136,7 +136,9 @@
 
         private void PlayWaveOut(string audioFilePath)
         {
-            if (new FileInfo(audioFilePath).Length == 0)
+            var wavFile = new FileInfo(audioFilePath);
+
+            if (wavFile.Exists && wavFile.Length == 0)
             {
                 /// 読み上げるテキストに不正な文字列が含まれている場合、
                 /// サイズ 0 の wav ファイルが生成される。
@@ -150,9 +152,21 @@
                 return;
             }
 
-            waveOut = new WaveOut();
-            waveOut.Init(new AudioFileReader(audioFilePath));
-            waveOut.Play();
+            var wavFileName = Path.GetFileNameWithoutExtension(wavFile.Name);
+            var mp3File = new FileInfo($@"{wavFile.Directory.Name}\{wavFileName}.mp3");
+
+            if (mp3File.Exists)
+            {
+                waveOut = new WaveOut();
+                waveOut.Init(new Mp3FileReader(mp3File.FullName));
+                waveOut.Play();
+            }
+            else
+            {
+                waveOut = new WaveOut();
+                waveOut.Init(new AudioFileReader(audioFilePath));
+                waveOut.Play();
+            }
 
             waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
         }
