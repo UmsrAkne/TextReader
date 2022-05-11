@@ -63,7 +63,7 @@
                 {
                     TextID = player.Texts[PlayingIndex].Id,
                     TalkerID = player.Talker.TalkerID,
-                    DateTime = System.DateTime.Now
+                    DateTime = DateTime.Now
                 });
 
                 ReadCharacterCount += player.Texts[PlayingIndex].Text.Length;
