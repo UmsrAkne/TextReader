@@ -1,20 +1,23 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModels="clr-namespace:TextReader.ViewModels">
 
     <StackPanel x:Key="StatusBarContent" Orientation="Horizontal">
 
-        <TextBlock Text="{Binding PlayingIndex}" />
+        <TextBlock Text="{Binding (viewModels:MainWindowViewModel.PlayingIndex)}" />
 
         <TextBlock Margin="5,0" Text="行" />
 
         <TextBlock Text="/" />
 
-        <TextBlock Margin="5,0" Text="{Binding Texts.Count}" />
+        <TextBlock Margin="5,0" Text="{Binding (viewModels:MainWindowViewModel.Texts).Count}" />
 
         <TextBlock Text="行" />
 
         <TextBlock Margin="4,0,0,0" Text="(" />
 
-        <TextBlock Margin="5,0" Text="{Binding ReadRatio}" />
+        <TextBlock Margin="5,0" Text="{Binding (viewModels:MainWindowViewModel.ReadRatio)}" />
 
         <TextBlock Text="%)" />
 
@@ -29,7 +32,7 @@
 
         <TextBlock Margin="5,0" Text="(合計読み上げ文字数 :" />
 
-        <TextBlock Text="{Binding ReadCharacterCount}" />
+        <TextBlock Text="{Binding (viewModels:MainWindowViewModel.ReadCharacterCount)}" />
 
         <TextBlock Text=")" />
 

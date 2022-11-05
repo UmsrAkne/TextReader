@@ -1,11 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dBs="clr-namespace:TextReader.Models.DBs"
     xmlns:models="clr-namespace:TextReader.Models">
 
     <models:NumberFormatConverter x:Key="NumberFormatConverter" />
 
-    <DataTemplate x:Key="TextItemTemplate">
+    <DataTemplate x:Key="TextItemTemplate" DataType="{x:Type dBs:TextRecord}">
         <Grid>
             <Grid.InputBindings>
                 <MouseBinding Command="{Binding DataContext.SetStartIndexCommand, RelativeSource={RelativeSource AncestorType=Window}}" MouseAction="LeftDoubleClick" />

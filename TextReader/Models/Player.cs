@@ -1,20 +1,19 @@
-﻿/// <summary>
-/// インスタンス内に IPlayer を実装したクラスを内蔵。
-/// それを使って入力されたテキスト（リスト）の読み上げを行うクラスです。
-/// </summary>
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using TextReader.Models.DBs;
+using TextReader.Models.Talkers;
+
 namespace TextReader.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using TextReader.Models.DBs;
-    using TextReader.Models.Talkers;
-
+    /// <summary>
+    /// インスタンス内に IPlayer を実装したクラスを内蔵。
+    /// それを使って入力されたテキスト（リスト）の読み上げを行うクラスです。
+    /// </summary>
+    ///
     public class Player
     {
         private ITalker talker;
-        private List<TextRecord> texts;
-        private int index;
         private TextRecord currentRecord;
 
         public event EventHandler PlayStarted;
@@ -27,17 +26,9 @@ namespace TextReader.Models
             set => talker = value;
         }
 
-        public List<TextRecord> Texts
-        {
-            get => texts;
-            set => texts = value;
-        }
+        public List<TextRecord> Texts { get; set; }
 
-        public int Index
-        {
-            get => index;
-            set => index = value;
-        }
+        public int Index { get; set; }
 
         public void Play()
         {

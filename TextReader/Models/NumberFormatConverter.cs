@@ -1,10 +1,10 @@
-﻿namespace TextReader.Models
-{
-    using System;
-    using System.Globalization;
-    using System.Linq;
-    using System.Windows.Data;
+﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Windows.Data;
 
+namespace TextReader.Models
+{
     public class NumberFormatConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
