@@ -108,7 +108,7 @@ namespace TextReader.Models.Talkers
             }
             else
             {
-                PlayWaveOut($"{outputDirectoryInfo.Name}\\{textRecord.OutputFileName}");
+                PlayWaveOut($"{GetOutputDirectoryPath(textRecord)}\\{textRecord.OutputFileName}");
             }
         }
 
@@ -122,16 +122,22 @@ namespace TextReader.Models.Talkers
             config.SpeechSynthesisLanguage = "ja-JP";
             config.SpeechSynthesisVoiceName = "ja-JP-KeitaNeural";
 
+            var outputDirectoryPath = GetOutputDirectoryPath(record);
+            if (!Directory.Exists(outputDirectoryPath))
+            {
+                Directory.CreateDirectory(outputDirectoryPath);
+            }
+
             OutputFileName = $"{DateTime.Now:yyyyMMddHHmmssff}.wav";
             record.OutputFileName = OutputFileName;
-            var audioConfig = AudioConfig.FromWavFileOutput($"{outputDirectoryInfo.Name}\\{OutputFileName}");
+            var audioConfig = AudioConfig.FromWavFileOutput($"{outputDirectoryPath}\\{OutputFileName}");
 
             using (var synthesizer = new SpeechSynthesizer(config, audioConfig))
             {
                 await synthesizer.SpeakTextAsync(record.Text);
             }
 
-            PlayWaveOut($"{outputDirectoryInfo.Name}\\{OutputFileName}");
+            PlayWaveOut($"{outputDirectoryPath}\\{OutputFileName}");
         }
 
         private void PlayWaveOut(string audioFilePath)
@@ -175,6 +181,11 @@ namespace TextReader.Models.Talkers
         {
             waveOut.PlaybackStopped -= WaveOut_PlaybackStopped;
             TalkStopped?.Invoke(this, EventArgs.Empty);
+        }
+
+        private string GetOutputDirectoryPath(TextRecord record)
+        {
+            return $@"{outputDirectoryInfo.Name}\{record.TitleNumber:0000}\";
         }
     }
 }
