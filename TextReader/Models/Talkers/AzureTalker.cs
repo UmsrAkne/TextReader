@@ -1,18 +1,18 @@
-﻿namespace TextReader.Models.Talkers
-{
-    using System;
-    using System.IO;
-    using System.Threading.Tasks;
-    using System.Windows.Threading;
-    using Microsoft.CognitiveServices.Speech;
-    using Microsoft.CognitiveServices.Speech.Audio;
-    using NAudio.Wave;
-    using TextReader.Models.DBs;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows.Threading;
+using Microsoft.CognitiveServices.Speech;
+using Microsoft.CognitiveServices.Speech.Audio;
+using NAudio.Wave;
+using TextReader.Models.DBs;
 
+namespace TextReader.Models.Talkers
+{
     public class AzureTalker : ITalker
     {
         private readonly DispatcherTimer waitTimer = new DispatcherTimer();
-        private DirectoryInfo outputDirectoryInfo = new DirectoryInfo("Output");
+        private readonly DirectoryInfo outputDirectoryInfo = new DirectoryInfo("Output");
         private WaveOut waveOut;
         private TimeSpan blankLineWaitTime = new TimeSpan(0, 0, 3);
 
@@ -50,9 +50,8 @@
 
         public TalkerSetting Setting
         {
-            get
-            {
-                return new TalkerSetting()
+            get =>
+                new TalkerSetting()
                 {
                     TalkerID = this.TalkerID,
                     TalkSpeed = this.TalkSpeed,
@@ -60,7 +59,6 @@
                     AzureTTSKeyVariableName = this.SecretKeyVariableName,
                     Volume = this.Volume,
                 };
-            }
 
             set
             {
@@ -118,11 +116,13 @@
         {
             string key = Environment.GetEnvironmentVariable(SecretKeyVariableName);
 
+            // ReSharper disable once StringLiteralTypo / 引数の region は変更不可のため　
             var config = SpeechConfig.FromSubscription(key, "japaneast");
+
             config.SpeechSynthesisLanguage = "ja-JP";
             config.SpeechSynthesisVoiceName = "ja-JP-KeitaNeural";
 
-            OutputFileName = $"{DateTime.Now.ToString("yyyyMMddHHmmssff")}.wav";
+            OutputFileName = $"{DateTime.Now:yyyyMMddHHmmssff}.wav";
             record.OutputFileName = OutputFileName;
             var audioConfig = AudioConfig.FromWavFileOutput($"{outputDirectoryInfo.Name}\\{OutputFileName}");
 
@@ -140,13 +140,13 @@
 
             if (wavFile.Exists && wavFile.Length == 0)
             {
-                /// 読み上げるテキストに不正な文字列が含まれている場合、
-                /// サイズ 0 の wav ファイルが生成される。
-                /// これを WaveOut() を使って再生すると例外がスローされる。
-                /// そのため、サイズが 0 だった場合は waitTimer を起動。
+                // 読み上げるテキストに不正な文字列が含まれている場合、
+                // サイズ 0 の wav ファイルが生成される。
+                // これを WaveOut() を使って再生すると例外がスローされる。
+                // そのため、サイズが 0 だった場合は waitTimer を起動。
 
-                /// 尚、このブロックが実行される時点では、まだハンドラがセットされていないので、
-                /// 即終了イベントを飛ばしても、次の音声が再生されない。
+                // 尚、このブロックが実行される時点では、まだハンドラがセットされていないので、
+                // 即終了イベントを飛ばしても、次の音声が再生されない。
 
                 waitTimer.Start();
                 return;

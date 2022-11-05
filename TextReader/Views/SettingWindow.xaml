@@ -6,7 +6,9 @@
     xmlns:local="clr-namespace:TextReader.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:TextReader.Models"
+    xmlns:viewModels="clr-namespace:TextReader.ViewModels"
     Title="SettingWindow"
+    d:DataContext="{d:DesignInstance viewModels:SettingWindowViewModel}"
     mc:Ignorable="d">
 
     <Page.Resources>

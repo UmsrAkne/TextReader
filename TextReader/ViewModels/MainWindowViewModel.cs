@@ -1,19 +1,20 @@
-﻿namespace TextReader.ViewModels
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Windows.Controls;
-    using Prism.Commands;
-    using Prism.Mvvm;
-    using Prism.Services.Dialogs;
-    using TextReader.Models;
-    using TextReader.Models.DBs;
-    using TextReader.Models.Talkers;
-    using TextReader.Views;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows.Controls;
+using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Services.Dialogs;
+using TextReader.Models;
+using TextReader.Models.DBs;
+using TextReader.Models.Talkers;
+using TextReader.Views;
 
+namespace TextReader.ViewModels
+{
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class MainWindowViewModel : BindableBase
     {
         private readonly TextDBContext databaseContext = new TextDBContext(TextDBContext.CreateDbContextOptions());
@@ -25,12 +26,12 @@
 
         private int selectionTitleIndex;
         private int selectionTextIndex;
-        private bool playing = false;
+        private bool playing;
         private int playingIndex;
         private int readCharacterCount;
         private ITalker talker;
-        private IDialogService dialogService;
-        private double readRatio = 0;
+        private readonly IDialogService dialogService;
+        private double readRatio;
 
         public MainWindowViewModel(IDialogService dialogService)
         {
@@ -41,12 +42,8 @@
             // 最後に利用していた話者を特定する。
             // 候補は数個しかないので、それぞれのインスタンスを生成して TalkeID を確認。
             var allTalkerList = new List<ITalker>() { new BouyomiTalker(), new AzureTalker() };
-            var lastUseTalker = allTalkerList.FirstOrDefault(t => Properties.Settings.Default.LastUseTalkerID == t.TalkerID);
-
-            if (lastUseTalker == null)
-            {
-                lastUseTalker = new BouyomiTalker();
-            }
+            var lastUseTalker = allTalkerList.FirstOrDefault(t => Properties.Settings.Default.LastUseTalkerID == t.TalkerID) ??
+                                new BouyomiTalker();
 
             ChangeTalkerCommand.Execute(lastUseTalker);
             player.Texts = new List<TextRecord>(Texts);
@@ -79,15 +76,11 @@
             };
         }
 
-        public string Title
-        {
-            get { return title; }
-            set { SetProperty(ref title, value); }
-        }
+        public string Title { get => title; set => SetProperty(ref title, value); }
 
-        public ObservableCollection<TextRecord> Texts { get => texts; set => SetProperty(ref texts, value); }
+        public ObservableCollection<TextRecord> Texts { get => texts; private set => SetProperty(ref texts, value); }
 
-        public List<TitleRecord> Titles { get => titles; set => SetProperty(ref titles, value); }
+        public List<TitleRecord> Titles { get => titles; private set => SetProperty(ref titles, value); }
 
         public int SelectionTitleIndex
         {
@@ -107,15 +100,27 @@
         /// こっちの方のプロパティは、ビューに表示する情報を取り出すために使う。(インスタンスは上述のものと同一)
         /// テストの関係で Player が BindableBase を継承できなかったため、２つに分かれている。
         /// </summary>
-        public ITalker Talker { get => talker; set => SetProperty(ref talker, value); }
+        public ITalker Talker { get => talker; private set => SetProperty(ref talker, value); }
 
-        public int ReadCharacterCount { get => readCharacterCount; set => SetProperty(ref readCharacterCount, value); }
+        public int ReadCharacterCount
+        {
+            get => readCharacterCount;
+            private set => SetProperty(ref readCharacterCount, value);
+        }
 
         public bool Playing { get => playing; set => SetProperty(ref playing, value); }
 
-        public int PlayingIndex { get => playingIndex; set => SetProperty(ref playingIndex, value); }
+        public int PlayingIndex
+        {
+            get => playingIndex;
+            private set => SetProperty(ref playingIndex, value);
+        }
 
-        public double ReadRatio { get => readRatio; set => SetProperty(ref readRatio, value); }
+        public double ReadRatio
+        {
+            get => readRatio;
+            private set => SetProperty(ref readRatio, value);
+        }
 
         public DelegateCommand PlayCommand => new DelegateCommand(() =>
         {
@@ -145,15 +150,15 @@
 
         public DelegateCommand<ITalker> ChangeTalkerCommand => new DelegateCommand<ITalker>((paramTalker) =>
         {
-            /// 下記のような経路で引数が回ってくる
-            /// CommandParameter として、MainWindow.xaml の方で生成した ITalker のインスタンスが入力される
-            /// このクラスのコンストラクタで初期設定を行う際に ITalker が入力される。
-            /// 設定画面で行った設定を反映させるため、MainWindowViewModel が保持している現在選択中の ITalker が入力される
+            // 下記のような経路で引数が回ってくる
+            // CommandParameter として、MainWindow.xaml の方で生成した ITalker のインスタンスが入力される
+            // このクラスのコンストラクタで初期設定を行う際に ITalker が入力される。
+            // 設定画面で行った設定を反映させるため、MainWindowViewModel が保持している現在選択中の ITalker が入力される
 
-            /// TalkerID を使ってデータベースから TalkerSetting を検索する
+            // TalkerID を使ってデータベースから TalkerSetting を検索する
             if (databaseContext.TalkerSettings.Any(ts => ts.TalkerID == paramTalker.TalkerID))
             {
-                paramTalker.Setting = databaseContext.TalkerSettings.Where(ts => ts.TalkerID == paramTalker.TalkerID).First();
+                paramTalker.Setting = databaseContext.TalkerSettings.First(ts => ts.TalkerID == paramTalker.TalkerID);
             }
 
             Talker = paramTalker;
@@ -175,9 +180,8 @@
 
         public DelegateCommand ShowSettingWindowCommand => new DelegateCommand(() =>
         {
-            var param = new DialogParameters();
-            param.Add(nameof(TextDBContext), databaseContext);
-            dialogService.ShowDialog(nameof(SettingWindow), param, new Action<IDialogResult>(r => { }));
+            var param = new DialogParameters { { nameof(TextDBContext), databaseContext } };
+            dialogService.ShowDialog(nameof(SettingWindow), param, r => { });
             ChangeTalkerCommand.Execute(Talker);
         });
 
@@ -188,16 +192,16 @@
         /// <param name="content">書き込むテキスト（行区切り）</param>
         public void WriteTextFile(string fileName, List<string> content)
         {
-            /// Drag and Drop を受け付けるビヘイビアから呼び出されるメソッド
+            // Drag and Drop を受け付けるビヘイビアから呼び出されるメソッド
 
-            int titleID = databaseContext.AddTitle(fileName);
+            int titleId = databaseContext.AddTitle(fileName);
             int counter = 0;
             var records = content.Select(t => new TextRecord()
             {
                 Text = t,
                 Index = counter++,
-                TitleNumber = titleID,
-                CreationDateTime = System.DateTime.Now
+                TitleNumber = titleId,
+                CreationDateTime = DateTime.Now
             }).ToList();
 
             databaseContext.AddTexts(records);

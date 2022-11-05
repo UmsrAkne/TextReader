@@ -1,21 +1,22 @@
-﻿namespace TextReader.ViewModels
-{
-    using System;
-    using System.Linq;
-    using Prism.Commands;
-    using Prism.Services.Dialogs;
-    using TextReader.Models.DBs;
-    using TextReader.Models.Talkers;
+﻿using System;
+using System.Linq;
+using Prism.Commands;
+using Prism.Services.Dialogs;
+using TextReader.Models.DBs;
+using TextReader.Models.Talkers;
 
+namespace TextReader.ViewModels
+{
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class SettingWindowViewModel : IDialogAware
     {
         private TextDBContext databaseContext;
 
         public event Action<IDialogResult> RequestClose;
 
-        public BouyomiTalker BouyomiTalker { get; set; } = new BouyomiTalker();
+        public BouyomiTalker BouyomiTalker { get; private set; } = new BouyomiTalker();
 
-        public AzureTalker AzureTalker { get; set; } = new AzureTalker();
+        public AzureTalker AzureTalker { get; private set; } = new AzureTalker();
 
         public string Title => "Setting";
 
@@ -28,7 +29,7 @@
 
         public void OnDialogClosed()
         {
-            void cloneSetting(ITalker talker, TalkerSetting destSetting)
+            void CloneSetting(ITalker talker, TalkerSetting destSetting)
             {
                 destSetting.TalkerID = talker.TalkerID;
                 destSetting.TalkSpeed = talker.TalkSpeed;
@@ -36,11 +37,11 @@
                 destSetting.BlankLineWaitTime = (int)talker.BlankLineWaitTime.TotalMilliseconds;
             }
 
-            var bouyomiSetting = databaseContext.TalkerSettings.Where(bou => BouyomiTalker.TalkerID == bou.TalkerID).FirstOrDefault();
+            var bouyomiSetting = databaseContext.TalkerSettings.FirstOrDefault(bou => BouyomiTalker.TalkerID == bou.TalkerID);
 
             if (bouyomiSetting != null)
             {
-                cloneSetting(BouyomiTalker, bouyomiSetting);
+                CloneSetting(BouyomiTalker, bouyomiSetting);
                 bouyomiSetting.BouyomiChanDirectoryPath = BouyomiTalker.BouyomiChanLocation;
             }
             else
@@ -48,11 +49,11 @@
                 databaseContext.TalkerSettings.Add(BouyomiTalker.Setting);
             }
 
-            var azureSetting = databaseContext.TalkerSettings.Where(az => AzureTalker.TalkerID == az.TalkerID).FirstOrDefault();
+            var azureSetting = databaseContext.TalkerSettings.FirstOrDefault(az => AzureTalker.TalkerID == az.TalkerID);
 
             if (azureSetting != null)
             {
-                cloneSetting(AzureTalker, azureSetting);
+                CloneSetting(AzureTalker, azureSetting);
                 azureSetting.AzureTTSKeyVariableName = AzureTalker.SecretKeyVariableName; 
             }
             else
@@ -67,14 +68,14 @@
         {
             databaseContext = parameters.GetValue<TextDBContext>(nameof(TextDBContext));
 
-            var bouyomiSetting = databaseContext.TalkerSettings.Where(bou => BouyomiTalker.TalkerID == bou.TalkerID).FirstOrDefault();
+            var bouyomiSetting = databaseContext.TalkerSettings.FirstOrDefault(bou => BouyomiTalker.TalkerID == bou.TalkerID);
 
             if (bouyomiSetting != null)
             {
                 BouyomiTalker = new BouyomiTalker() { Setting = bouyomiSetting };
             }
 
-            var azureSetting = databaseContext.TalkerSettings.Where(az => AzureTalker.TalkerID == az.TalkerID).FirstOrDefault();
+            var azureSetting = databaseContext.TalkerSettings.FirstOrDefault(az => AzureTalker.TalkerID == az.TalkerID);
 
             if (azureSetting != null)
             {
