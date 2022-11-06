@@ -183,40 +183,62 @@
             ItemsSource="{Binding Titles}"
             SelectedIndex="{Binding SelectionTitleIndex}" />
 
-        <ListView
-            Name="listView"
-            Grid.Row="2"
-            Grid.Column="1"
-            HorizontalContentAlignment="Stretch"
-            AlternationCount="2"
-            ItemTemplate="{StaticResource ResourceKey=TextItemTemplate}"
-            ItemsSource="{Binding Texts}"
-            SelectedIndex="{Binding SelectionTextIndex}">
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
+            <StackPanel>
+                <DockPanel Margin="0,3">
+                    <TextBlock Margin="5,0" Text="Title : " />
+                    <TextBox Margin="5,0" Text="{Binding SelectionTitleName}" />
+                </DockPanel>
 
-                    <Style.Triggers>
-                        <!--  偶数行の背景色  -->
-                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                            <Setter Property="Background" Value="WhiteSmoke" />
-                        </Trigger>
-                        <!--  選択行の背景色  -->
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{x:Static SystemColors.HighlightBrush}" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </ListView.ItemContainerStyle>
+                <DockPanel Margin="0,3">
+                    <TextBlock Margin="5,0" Text="ID : " />
+                    <TextBlock Margin="5,0" Text="{Binding SelectionTitle.Id}" />
 
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
+                    <TextBlock Margin="5,0" Text="追加日時 : " />
+                    <TextBlock Margin="5,0" Text="{Binding SelectionTitle.CreationDateTime}" />
+                </DockPanel>
 
-                    <i:InvokeCommandAction Command="{Binding ScrollCommand}" CommandParameter="{Binding ElementName=listView}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+            </StackPanel>
 
-        </ListView>
+            <ListView
+                Name="listView"
+                Grid.Row="1"
+                HorizontalContentAlignment="Stretch"
+                AlternationCount="2"
+                ItemTemplate="{StaticResource ResourceKey=TextItemTemplate}"
+                ItemsSource="{Binding Texts}"
+                SelectedIndex="{Binding SelectionTextIndex}">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+
+                        <Style.Triggers>
+                            <!--  偶数行の背景色  -->
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="WhiteSmoke" />
+                            </Trigger>
+                            <!--  選択行の背景色  -->
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{x:Static SystemColors.HighlightBrush}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+
+                        <i:InvokeCommandAction Command="{Binding ScrollCommand}" CommandParameter="{Binding ElementName=listView}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </ListView>
+        </Grid>
 
         <StatusBar
             Grid.Row="3"
