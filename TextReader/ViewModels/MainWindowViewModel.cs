@@ -24,6 +24,8 @@ namespace TextReader.ViewModels
         private List<TitleRecord> titles = new List<TitleRecord>();
         private ObservableCollection<TextRecord> texts = new ObservableCollection<TextRecord>();
 
+        private TitleRecord selectionTitle;
+        private string selectionTitleName;
         private int selectionTitleIndex;
         private int selectionTextIndex;
         private bool playing;
@@ -89,7 +91,26 @@ namespace TextReader.ViewModels
             {
                 SetProperty(ref selectionTitleIndex, value);
                 Texts = new ObservableCollection<TextRecord>(databaseContext.GetTexts(Titles[SelectionTitleIndex].Id));
+                SelectionTitle = Titles[SelectionTitleIndex];
+                SelectionTitleName = SelectionTitle.Title;
                 player.Texts = new List<TextRecord>(Texts);
+            }
+        }
+
+        public TitleRecord SelectionTitle { get => selectionTitle; private set => SetProperty(ref selectionTitle, value); }
+
+        public string SelectionTitleName
+        {
+            get => selectionTitleName;
+            set
+            {
+                if (SelectionTitle != null)
+                {
+                    SelectionTitle.Title = value;
+                    databaseContext.SaveChanges();
+                }
+
+                SetProperty(ref selectionTitleName, value);
             }
         }
 
