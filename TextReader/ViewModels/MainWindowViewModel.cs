@@ -236,6 +236,7 @@ namespace TextReader.ViewModels
             if (Titles.Count > 0)
             {
                 Texts = new ObservableCollection<TextRecord>(databaseContext.GetTexts(Titles.First().Id));
+                SelectionTitleIndex = 0;
                 player.Texts = new List<TextRecord>(Texts);
             }
         }
