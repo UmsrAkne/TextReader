@@ -1,10 +1,10 @@
-﻿namespace TextReader.Models.Tests
-{
-    using System.Collections.Generic;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using TextReader.Models.DBs;
-    using TextReaderTests.Models.Talkers;
+﻿using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TextReader.Models.DBs;
+using TextReaderTests.Models.Talkers;
 
+namespace TextReader.Models.Tests
+{
     [TestClass]
     public class PlayerTests
     {

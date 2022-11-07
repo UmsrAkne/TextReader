@@ -7,16 +7,16 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class TextDBContextTests
+    public class TextDbContextTests
     {
         [TestMethod]
         public void GetTextsTest()
         {
-            var option = new DbContextOptionsBuilder<TextDBContext>()
+            var option = new DbContextOptionsBuilder<TextDbContext>()
             .UseInMemoryDatabase(databaseName: "TestMemoryDB")
             .Options;
 
-            var db = new TextDBContext(option);
+            var db = new TextDbContext(option);
             db.Database.EnsureCreated();
 
             db.AddTexts(new List<TextRecord>()
@@ -50,11 +50,11 @@
         [TestMethod]
         public void AddTitleTest()
         {
-            var option = new DbContextOptionsBuilder<TextDBContext>()
+            var option = new DbContextOptionsBuilder<TextDbContext>()
             .UseInMemoryDatabase(databaseName: "TestMemoryDB")
             .Options;
 
-            var db = new TextDBContext(option);
+            var db = new TextDbContext(option);
             db.Database.EnsureCreated();
 
             Assert.AreEqual(1, db.AddTitle("title1"));
