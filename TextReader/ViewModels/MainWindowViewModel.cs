@@ -17,7 +17,7 @@ namespace TextReader.ViewModels
     // ReSharper disable once ClassNeverInstantiated.Global
     public class MainWindowViewModel : BindableBase
     {
-        private readonly TextDBContext databaseContext = new TextDBContext(TextDBContext.CreateDbContextOptions());
+        private readonly TextDbContext databaseContext = new TextDbContext(TextDbContext.CreateDbContextOptions());
         private readonly Player player = new Player();
 
         private string title = "Text reader";
@@ -201,7 +201,7 @@ namespace TextReader.ViewModels
 
         public DelegateCommand ShowSettingWindowCommand => new DelegateCommand(() =>
         {
-            var param = new DialogParameters { { nameof(TextDBContext), databaseContext } };
+            var param = new DialogParameters { { nameof(TextDbContext), databaseContext } };
             dialogService.ShowDialog(nameof(SettingWindow), param, r => { });
             ChangeTalkerCommand.Execute(Talker);
         });

@@ -1,14 +1,14 @@
-﻿namespace TextReader.Models.Talkers
-{
-    using System;
-    using System.Diagnostics;
-    using System.Windows.Threading;
-    using TextReader.Models.DBs;
+﻿using System;
+using System.Diagnostics;
+using System.Windows.Threading;
+using TextReader.Models.DBs;
 
+namespace TextReader.Models.Talkers
+{
     public class BouyomiTalker : ITalker
     {
-        private DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
-        private DispatcherTimer waitTimer = new DispatcherTimer();
+        private readonly DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
+        private readonly DispatcherTimer waitTimer = new DispatcherTimer();
         private int playingCheckWaitCounter;
         private TimeSpan blankLineWaitTime = new TimeSpan(0, 0, 3);
 
@@ -32,7 +32,7 @@
 
         public int MinTalkSpeed => 50;
 
-        public int DefaultTalkSpeed => 100;
+        private int DefaultTalkSpeed => 100;
 
         public string TalkerName => "棒読みちゃん";
 
@@ -52,16 +52,14 @@
 
         public TalkerSetting Setting
         {
-            get
-            {
-                return new TalkerSetting()
+            get =>
+                new TalkerSetting()
                 {
                     TalkerID = this.TalkerID,
                     TalkSpeed = this.TalkSpeed,
                     BlankLineWaitTime = (int)this.BlankLineWaitTime.TotalMilliseconds,
                     Volume = this.Volume,
                 };
-            }
 
             set
             {
@@ -82,8 +80,8 @@
 
         public void Talk(TextRecord record)
         {
-            /// 他の実装クラスの Talk() との兼ね合いで TextRecord を引数に取っているが、
-            /// このクラスで必要なのはテキストのみなので、テキストだけ取り出して利用する。
+            // 他の実装クラスの Talk() との兼ね合いで TextRecord を引数に取っているが、
+            // このクラスで必要なのはテキストのみなので、テキストだけ取り出して利用する。
             var message = record.Text;
 
             if (string.IsNullOrWhiteSpace(message))
@@ -92,7 +90,7 @@
             }
             else
             {
-                /// Talk の引数は 入力文章 速度 音程 音量 話者ID の順となっている。
+                // Talk の引数は 入力文章 速度 音程 音量 話者ID の順となっている。
                 ExecuteRemoteTalk($"/Talk {message} {TalkSpeed} -1 {Volume} 0");
                 playingCheckWaitCounter = (int)Math.Ceiling((decimal)message.Length / 30);
                 timer.Start();
@@ -111,7 +109,7 @@
             var process = ExecuteRemoteTalk($"/GetNowPlaying");
             process.WaitForExit();
 
-            /// GetNowPlaying を実行した時、音声を再生中ならば 1 、再生中でなければ 0 が終了コードで返ってくる
+            // GetNowPlaying を実行した時、音声を再生中ならば 1 、再生中でなければ 0 が終了コードで返ってくる
 
             if (process.ExitCode == 0)
             {

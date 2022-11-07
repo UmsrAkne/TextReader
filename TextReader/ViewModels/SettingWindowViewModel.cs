@@ -10,7 +10,7 @@ namespace TextReader.ViewModels
     // ReSharper disable once ClassNeverInstantiated.Global
     public class SettingWindowViewModel : IDialogAware
     {
-        private TextDBContext databaseContext;
+        private TextDbContext databaseContext;
 
         public event Action<IDialogResult> RequestClose;
 
@@ -66,7 +66,7 @@ namespace TextReader.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            databaseContext = parameters.GetValue<TextDBContext>(nameof(TextDBContext));
+            databaseContext = parameters.GetValue<TextDbContext>(nameof(TextDbContext));
 
             var bouyomiSetting = databaseContext.TalkerSettings.FirstOrDefault(bou => BouyomiTalker.TalkerID == bou.TalkerID);
 

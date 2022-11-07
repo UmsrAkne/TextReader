@@ -1,10 +1,10 @@
-﻿namespace TextReader
-{
-    using System.Windows;
-    using Prism.Ioc;
-    using TextReader.ViewModels;
-    using TextReader.Views;
+﻿using System.Windows;
+using Prism.Ioc;
+using TextReader.ViewModels;
+using TextReader.Views;
 
+namespace TextReader
+{
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>

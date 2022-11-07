@@ -1,8 +1,8 @@
-﻿namespace TextReader.Models.Talkers
-{
-    using System;
-    using TextReader.Models.DBs;
+﻿using System;
+using TextReader.Models.DBs;
 
+namespace TextReader.Models.Talkers
+{
     public interface ITalker
     {
         event EventHandler TalkStopped;

@@ -8,27 +8,31 @@
     using Microsoft.Data.Sqlite;
     using Microsoft.EntityFrameworkCore;
 
-    public class TextDBContext : DbContext
+    public class TextDbContext : DbContext
     {
-        public TextDBContext()
+        public TextDbContext()
         {
         }
 
-        public TextDBContext(DbContextOptions<TextDBContext> options) : base(options)
+        public TextDbContext(DbContextOptions<TextDbContext> options) : base(options)
         {
         }
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public DbSet<ListenLog> Histories { get; set; }
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public DbSet<TalkerSetting> TalkerSettings { get; set; }
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private DbSet<TextRecord> Texts { get; set; }
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private DbSet<TitleRecord> Titles { get; set; }
 
-        public static DbContextOptions<TextDBContext> CreateDbContextOptions()
+        public static DbContextOptions<TextDbContext> CreateDbContextOptions()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<TextDBContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<TextDbContext>();
             string databaseFileName = "TextDB.sqlite";
 
             if (!File.Exists(databaseFileName))
@@ -48,7 +52,7 @@
             .ToList();
         }
 
-        public TextRecord GetText(int textID) => Texts.Where(t => t.Id == textID).First();
+        public TextRecord GetText(int textId) => Texts.First(t => t.Id == textId);
 
         public void AddTexts(List<TextRecord> texts)
         {
