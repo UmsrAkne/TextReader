@@ -201,6 +201,10 @@
 
                     <TextBlock Margin="5,0" Text="追加日時 : " />
                     <TextBlock Margin="5,0" Text="{Binding SelectionTitle.CreationDateTime}" />
+
+                    <TextBlock Margin="5,0" Text="既読率 :" />
+                    <TextBlock Margin="5,0" Text="{Binding ReadRatio}" />
+                    <TextBlock Text="％" />
                 </DockPanel>
 
             </StackPanel>
