@@ -33,7 +33,7 @@ namespace TextReader.ViewModels
         private int readCharacterCount;
         private ITalker talker;
         private readonly IDialogService dialogService;
-        private double readRatio;
+        private double readPositionRatio;
 
         public MainWindowViewModel(IDialogService dialogService)
         {
@@ -74,7 +74,7 @@ namespace TextReader.ViewModels
             {
                 PlayingIndex = player.Index;
                 Playing = false;
-                ReadRatio = PlayingIndex != 0 ? Math.Round(100.0 * PlayingIndex / player.Texts.Count, 3) : 0;
+                ReadPositionRatio = PlayingIndex != 0 ? Math.Round(100.0 * PlayingIndex / player.Texts.Count, 3) : 0;
             };
         }
 
@@ -137,10 +137,10 @@ namespace TextReader.ViewModels
             private set => SetProperty(ref playingIndex, value);
         }
 
-        public double ReadRatio
+        public double ReadPositionRatio
         {
-            get => readRatio;
-            private set => SetProperty(ref readRatio, value);
+            get => readPositionRatio;
+            private set => SetProperty(ref readPositionRatio, value);
         }
 
         public DelegateCommand PlayCommand => new DelegateCommand(() =>

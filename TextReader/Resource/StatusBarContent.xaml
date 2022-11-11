@@ -21,7 +21,7 @@
 
         <TextBlock Margin="4,0,0,0" Text="(" />
 
-        <TextBlock Margin="5,0" Text="{Binding ReadRatio}" />
+        <TextBlock Margin="5,0" Text="{Binding ReadPositionRatio}" />
 
         <TextBlock Text="%)" />
 
