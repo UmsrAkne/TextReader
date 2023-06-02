@@ -34,5 +34,17 @@ namespace TextReader.Properties {
                 this["LastUseTalkerID"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("blankSound.wav")]
+        public string BlankSoundFilePath {
+            get {
+                return ((string)(this[nameof(BlankSoundFilePath)]));
+            }
+            set {
+                this[nameof(BlankSoundFilePath)] = value;
+            }
+        }
     }
 }

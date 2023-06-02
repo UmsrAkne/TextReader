@@ -84,6 +84,8 @@ namespace TextReader.Models.Talkers
             }
         }
 
+        public string BlankSoundFilePath { get; set; } = "blankSound.wav";
+
         public int TalkerID => 2;
 
         public void Stop()
@@ -116,7 +118,7 @@ namespace TextReader.Models.Talkers
         {
             OutputFileName = $"{DateTime.Now:yyyyMMddHHmmssff}_blank.wav";
             var outputDirectoryPath = GetOutputDirectoryPath(record);
-            File.Copy("blankSound.wav", $"{outputDirectoryPath}\\{OutputFileName}");
+            File.Copy(BlankSoundFilePath, $"{outputDirectoryPath}\\{OutputFileName}");
             PlayWaveOut($"{outputDirectoryPath}\\{OutputFileName}");
             record.OutputFileName = OutputFileName;
             return Task.CompletedTask;
