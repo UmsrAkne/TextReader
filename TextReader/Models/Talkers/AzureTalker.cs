@@ -84,6 +84,8 @@ namespace TextReader.Models.Talkers
             }
         }
 
+        public string BlankSoundFilePath { get; set; } = "blankSound.wav";
+
         public int TalkerID => 2;
 
         public void Stop()
@@ -96,20 +98,30 @@ namespace TextReader.Models.Talkers
 
         public async void Talk(TextRecord textRecord)
         {
-            if (string.IsNullOrEmpty(textRecord.Text))
-            {
-                waitTimer.Start();
-                return;
-            }
-
             if (string.IsNullOrWhiteSpace(textRecord.OutputFileName))
             {
+                if (string.IsNullOrWhiteSpace(textRecord.Text))
+                {
+                    await CreateBlankAudioFile(textRecord);
+                    return;
+                }
+
                 await StartTalk(textRecord);
             }
             else
             {
                 PlayWaveOut($"{GetOutputDirectoryPath(textRecord)}\\{textRecord.OutputFileName}");
             }
+        }
+
+        private Task CreateBlankAudioFile(TextRecord record)
+        {
+            OutputFileName = $"{DateTime.Now:yyyyMMddHHmmssff}_blank.wav";
+            var outputDirectoryPath = GetOutputDirectoryPath(record);
+            File.Copy(BlankSoundFilePath, $"{outputDirectoryPath}\\{OutputFileName}");
+            PlayWaveOut($"{outputDirectoryPath}\\{OutputFileName}");
+            record.OutputFileName = OutputFileName;
+            return Task.CompletedTask;
         }
 
         private async Task StartTalk(TextRecord record)

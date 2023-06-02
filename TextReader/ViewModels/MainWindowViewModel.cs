@@ -192,6 +192,11 @@ namespace TextReader.ViewModels
             Talker = paramTalker;
             player.Talker = Talker;
 
+            if (paramTalker is AzureTalker tk)
+            {
+                tk.BlankSoundFilePath = Properties.Settings.Default.BlankSoundFilePath;
+            }
+
             Properties.Settings.Default.LastUseTalkerID = Talker.TalkerID;
             Properties.Settings.Default.Save();
 

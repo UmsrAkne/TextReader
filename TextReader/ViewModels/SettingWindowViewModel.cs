@@ -25,6 +25,8 @@ namespace TextReader.ViewModels
             RequestClose?.Invoke(new DialogResult());
         });
 
+        public string BlankSoundFilePath { get; set; } = "blankSound.wav";
+
         public bool CanCloseDialog() => true;
 
         public void OnDialogClosed()
@@ -62,6 +64,9 @@ namespace TextReader.ViewModels
             }
 
             databaseContext.SaveChanges();
+
+            Properties.Settings.Default.BlankSoundFilePath = BlankSoundFilePath;
+            Properties.Settings.Default.Save();
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
@@ -81,6 +86,8 @@ namespace TextReader.ViewModels
             {
                 AzureTalker = new AzureTalker() { Setting = azureSetting };
             }
+
+            BlankSoundFilePath = Properties.Settings.Default.BlankSoundFilePath;
         }
     }
 }
