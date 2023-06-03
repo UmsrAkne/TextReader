@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TextReader.Models;
 using TextReader.Models.DBs;
 using TextReaderTests.Models.Talkers;
 
-namespace TextReader.Models.Tests
+namespace TextReaderTests.Models
 {
     [TestClass]
     public class PlayerTests

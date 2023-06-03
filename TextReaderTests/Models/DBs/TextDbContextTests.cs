@@ -1,11 +1,12 @@
-﻿namespace TextReader.Models.DBs.Tests
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TextReader.Models.DBs;
 
+namespace TextReaderTests.Models.DBs
+{
     [TestClass]
     public class TextDbContextTests
     {
