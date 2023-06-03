@@ -114,13 +114,13 @@
                     Command="{Binding PlayCommand}"
                     Content="Play"
                     IsEnabled="{Binding Playing, Converter={StaticResource BoolNegativeConverter}}"
-                    Template="{StaticResource buttonTemplate}" />
+                    Template="{StaticResource ButtonTemplate}" />
 
                 <Button
                     Command="{Binding StopCommand}"
                     Content="Stop"
                     IsEnabled="{Binding Playing}"
-                    Template="{StaticResource buttonTemplate}" />
+                    Template="{StaticResource ButtonTemplate}" />
             </StackPanel>
 
         </Border>
@@ -210,7 +210,7 @@
             </StackPanel>
 
             <ListView
-                Name="listView"
+                Name="ListView"
                 Grid.Row="1"
                 HorizontalContentAlignment="Stretch"
                 AlternationCount="2"
@@ -237,7 +237,7 @@
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
 
-                        <i:InvokeCommandAction Command="{Binding ScrollCommand}" CommandParameter="{Binding ElementName=listView}" />
+                        <i:InvokeCommandAction Command="{Binding ScrollCommand}" CommandParameter="{Binding ElementName=ListView}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
 
@@ -246,6 +246,7 @@
 
         <StatusBar
             Grid.Row="3"
+            Grid.Column="0"
             Grid.ColumnSpan="2"
             Height="25">
             <StatusBarItem HorizontalAlignment="Right" Content="{StaticResource StatusBarContent}" />
