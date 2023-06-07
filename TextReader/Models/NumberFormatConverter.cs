@@ -16,7 +16,9 @@ namespace TextReader.Models
                 return string.Format("{0:" + string.Join(string.Empty, zeros) + "}", (int)value);
             }
 
-            return string.Format("{0:00000}", (int)value);
+            return value != null
+                ? $"{(int)value:00000}"
+                : string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
