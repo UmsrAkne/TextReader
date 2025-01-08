@@ -20,7 +20,6 @@ namespace TextReader.ViewModels
         private readonly TextDbContext databaseContext = new TextDbContext(TextDbContext.CreateDbContextOptions());
         private readonly Player player = new Player();
 
-        private string title = "Text reader";
         private List<TitleRecord> titles = new List<TitleRecord>();
         private ObservableCollection<TextRecord> texts = new ObservableCollection<TextRecord>();
 
@@ -81,7 +80,7 @@ namespace TextReader.ViewModels
             };
         }
 
-        public string Title { get => title; set => SetProperty(ref title, value); }
+        public TextWrapper Title { get; } = new TextWrapper();
 
         public ObservableCollection<TextRecord> Texts { get => texts; private set => SetProperty(ref texts, value); }
 
