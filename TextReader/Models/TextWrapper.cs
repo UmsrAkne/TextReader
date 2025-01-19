@@ -36,8 +36,8 @@ namespace TextReader.Models
         {
             const int major = 1;
             const int minor = 0;
-            const int patch = 0;
-            const string date = "20250108";
+            const int patch = 1;
+            const string date = "20250119";
             const string suffix = "a";
 
             Version = $"{major}.{minor}.{patch} ({date}{suffix})";
