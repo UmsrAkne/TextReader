@@ -26,20 +26,20 @@ namespace TextReaderTests.Models.DBs
                 {
                     TitleNumber = 0,
                     Text = "text1",
-                    CreationDateTime = new DateTime(2000, 1, 1)
+                    CreationDateTime = new DateTime(2000, 1, 1),
                 },
                 new TextRecord()
                 {
                     TitleNumber = 0,
                     Text = "text2",
-                    CreationDateTime = new DateTime(2000, 1, 1)
+                    CreationDateTime = new DateTime(2000, 1, 1),
                 },
                 new TextRecord()
                 {
                     TitleNumber = 1,
                     Text = "text3",
-                    CreationDateTime = new DateTime(2000, 1, 1)
-                }
+                    CreationDateTime = new DateTime(2000, 1, 1),
+                },
             });
 
             var result = db.GetTexts(titleNumber: 0);

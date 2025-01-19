@@ -28,12 +28,6 @@ namespace TextReader.Models.Talkers
 
         public int Volume { get; set; } = 100;
 
-        public int MaxTalkSpeed => 300;
-
-        public int MinTalkSpeed => 50;
-
-        private int DefaultTalkSpeed => 100;
-
         public string TalkerName => "棒読みちゃん";
 
         public string BouyomiChanLocation { get; set; } = @"BouyomiChan\RemoteTalk\RemoteTalk.exe";
@@ -55,10 +49,10 @@ namespace TextReader.Models.Talkers
             get =>
                 new TalkerSetting()
                 {
-                    TalkerID = this.TalkerID,
-                    TalkSpeed = this.TalkSpeed,
-                    BlankLineWaitTime = (int)this.BlankLineWaitTime.TotalMilliseconds,
-                    Volume = this.Volume,
+                    TalkerID = TalkerID,
+                    TalkSpeed = TalkSpeed,
+                    BlankLineWaitTime = (int)BlankLineWaitTime.TotalMilliseconds,
+                    Volume = Volume,
                 };
 
             set
@@ -72,6 +66,12 @@ namespace TextReader.Models.Talkers
                 }
             }
         }
+
+        public int MaxTalkSpeed => 300;
+
+        public int MinTalkSpeed => 50;
+
+        private int DefaultTalkSpeed => 100;
 
         public void Stop()
         {
@@ -110,7 +110,6 @@ namespace TextReader.Models.Talkers
             process.WaitForExit();
 
             // GetNowPlaying を実行した時、音声を再生中ならば 1 、再生中でなければ 0 が終了コードで返ってくる
-
             if (process.ExitCode == 0)
             {
                 timer.Stop();
