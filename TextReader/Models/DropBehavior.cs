@@ -13,17 +13,17 @@ namespace TextReader.Models
             base.OnAttached();
 
             // ファイルをドラッグしてきて、コントロール上に乗せた際の処理
-            AssociatedObject.PreviewDragOver += this.AssociatedObject_PreviewDragOver;
+            AssociatedObject.PreviewDragOver += AssociatedObject_PreviewDragOver;
 
             // ファイルをドロップした際の処理
-            AssociatedObject.Drop += this.AssociatedObject_Drop;
+            AssociatedObject.Drop += AssociatedObject_Drop;
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.PreviewDragOver -= this.AssociatedObject_PreviewDragOver;
-            AssociatedObject.Drop -= this.AssociatedObject_Drop;
+            AssociatedObject.PreviewDragOver -= AssociatedObject_PreviewDragOver;
+            AssociatedObject.Drop -= AssociatedObject_Drop;
         }
 
         private void AssociatedObject_Drop(object sender, DragEventArgs e)
@@ -35,7 +35,10 @@ namespace TextReader.Models
             if (files != null)
             {
                 var texts = File.ReadAllLines(files[0]).ToList();
-                if (vm != null) vm.WriteTextFile(Path.GetFileName(files[0]), texts);
+                if (vm != null)
+                {
+                    vm.WriteTextFile(Path.GetFileName(files[0]), texts);
+                }
             }
         }
 

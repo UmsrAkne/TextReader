@@ -70,7 +70,7 @@
             var titleRecord = new TitleRecord()
             {
                 Title = title,
-                CreationDateTime = DateTime.Now
+                CreationDateTime = DateTime.Now,
             };
 
             Titles.Add(titleRecord);

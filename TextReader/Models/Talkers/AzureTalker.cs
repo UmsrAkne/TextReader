@@ -53,11 +53,11 @@ namespace TextReader.Models.Talkers
             get =>
                 new TalkerSetting()
                 {
-                    TalkerID = this.TalkerID,
-                    TalkSpeed = this.TalkSpeed,
-                    BlankLineWaitTime = (int)this.BlankLineWaitTime.TotalMilliseconds,
-                    AzureTTSKeyVariableName = this.SecretKeyVariableName,
-                    Volume = this.Volume,
+                    TalkerID = TalkerID,
+                    TalkSpeed = TalkSpeed,
+                    BlankLineWaitTime = (int)BlankLineWaitTime.TotalMilliseconds,
+                    AzureTTSKeyVariableName = SecretKeyVariableName,
+                    Volume = Volume,
                 };
 
             set
@@ -165,7 +165,6 @@ namespace TextReader.Models.Talkers
 
                 // 尚、このブロックが実行される時点では、まだハンドラがセットされていないので、
                 // 即終了イベントを飛ばしても、次の音声が再生されない。
-
                 waitTimer.Start();
                 return;
             }
@@ -177,15 +176,14 @@ namespace TextReader.Models.Talkers
             {
                 waveOut = new WaveOut();
                 waveOut.Init(new Mp3FileReader(mp3File.FullName));
-                waveOut.Play();
             }
             else
             {
                 waveOut = new WaveOut();
                 waveOut.Init(new AudioFileReader(audioFilePath));
-                waveOut.Play();
             }
 
+            waveOut.Play();
             waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
         }
 

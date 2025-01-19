@@ -17,8 +17,8 @@ namespace TextReaderTests.Models
 
             player.Texts = new List<TextRecord>()
             {
-                new TextRecord() { Text = "text1" },
-                new TextRecord() { Text = "text2" }
+                new TextRecord() { Text = "text1", },
+                new TextRecord() { Text = "text2", },
             };
 
             Assert.AreEqual(dummyTalker.LastReadMessage, string.Empty);
@@ -52,8 +52,8 @@ namespace TextReaderTests.Models
 
             var texts = new List<TextRecord>()
             {
-                new TextRecord() { Text = "text1" },
-                new TextRecord() { Text = "text2" }
+                new TextRecord() { Text = "text1", },
+                new TextRecord() { Text = "text2", },
             };
 
             player.Texts = texts;

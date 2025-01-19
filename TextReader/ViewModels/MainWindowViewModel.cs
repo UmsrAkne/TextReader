@@ -19,6 +19,7 @@ namespace TextReader.ViewModels
     {
         private readonly TextDbContext databaseContext = new TextDbContext(TextDbContext.CreateDbContextOptions());
         private readonly Player player = new Player();
+        private readonly IDialogService dialogService;
 
         private List<TitleRecord> titles = new List<TitleRecord>();
         private ObservableCollection<TextRecord> texts = new ObservableCollection<TextRecord>();
@@ -31,7 +32,6 @@ namespace TextReader.ViewModels
         private int playingIndex;
         private int readCharacterCount;
         private ITalker talker;
-        private readonly IDialogService dialogService;
         private double readPositionRatio;
         private double readRatio;
 
@@ -62,7 +62,7 @@ namespace TextReader.ViewModels
                 {
                     TextID = player.Texts[PlayingIndex].Id,
                     TalkerID = player.Talker.TalkerID,
-                    DateTime = DateTime.Now
+                    DateTime = DateTime.Now,
                 });
 
                 ReadCharacterCount += player.Texts[PlayingIndex].Text.Length;
@@ -76,7 +76,7 @@ namespace TextReader.ViewModels
                 Playing = false;
                 ReadPositionRatio = PlayingIndex != 0 ? Math.Round(100.0 * PlayingIndex / player.Texts.Count, 3) : 0;
                 double unreadCount = player.Texts.Count(t => t.ListenCount <= 0);
-                ReadRatio = Math.Round(100.0 * (player.Texts.Count - unreadCount) / player.Texts.Count , 3);
+                ReadRatio = Math.Round(100.0 * (player.Texts.Count - unreadCount) / player.Texts.Count, 3);
             };
         }
 
@@ -97,7 +97,7 @@ namespace TextReader.ViewModels
                 SelectionTitleName = SelectionTitle.Title;
                 player.Texts = new List<TextRecord>(Texts);
                 double unreadCount = player.Texts.Count(t => t.ListenCount <= 0);
-                ReadRatio = Math.Round(100.0 * (player.Texts.Count - unreadCount) / player.Texts.Count , 3);
+                ReadRatio = Math.Round(100.0 * (player.Texts.Count - unreadCount) / player.Texts.Count, 3);
             }
         }
 
@@ -225,7 +225,6 @@ namespace TextReader.ViewModels
         public void WriteTextFile(string fileName, List<string> content)
         {
             // Drag and Drop を受け付けるビヘイビアから呼び出されるメソッド
-
             int titleId = databaseContext.AddTitle(fileName);
             int counter = 0;
             var records = content.Select(t => new TextRecord()
@@ -233,7 +232,7 @@ namespace TextReader.ViewModels
                 Text = t,
                 Index = counter++,
                 TitleNumber = titleId,
-                CreationDateTime = DateTime.Now
+                CreationDateTime = DateTime.Now,
             }).ToList();
 
             databaseContext.AddTexts(records);
